@@ -1,0 +1,200 @@
+.DI-container {
+  padding: 0 15px 15px 15px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.DI-subcontainer {
+  padding: 0 30px 30px 30px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.DI-name-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.DI-buttonn {
+  margin: 10px 0;
+  width: 100px;
+  height: 40px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  background-color: orange;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.DI-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.DI-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.DI-main-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Vehicle Card */
+.DI-vehicle-card {
+  width: 250px;
+  height: 250px;
+  background-color: #254e58;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.DI-vehicle-image {
+  width: 100%;
+  max-height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.DI-vehicle-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.DI-stars {
+  margin-bottom: 10px;
+  color: #ffc107;
+}
+
+.DI-vehicle-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 12px;
+  justify-content: space-between;
+}
+
+.DI-vehicle-details span {
+  display: block;
+}
+
+/* Driver Details */
+.DI-driver-details {
+  flex: 1;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.DI-driver-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.DI-driver-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.DI-driver-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.DI-driver-email {
+  font-size: 12px;
+  color: #888;
+}
+
+.DI-driver-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.DI-driver-info div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.DI-driver-info strong {
+  color: #333;
+  font-weight: bold;
+}
+
+
+.DI-map-trip {
+  display: flex;
+  gap: 20px;
+}
+
+.DI-map {
+  flex: 1;
+  height: 300px;
+  border-radius: 8px;
+}
+
+.DI-trip-details {
+  flex: 1;
+  background-color: #e6f4f1;
+  padding: 0 15px 15px 15px;
+  border-radius: 8px;
+}
+
+.DI-trip-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.DI-trip-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.DI-trip-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.DI-trip-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.DI-trip-item strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.DI-trip-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}

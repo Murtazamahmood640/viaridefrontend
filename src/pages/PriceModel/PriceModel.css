@@ -1,0 +1,437 @@
+.priceModel {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.priceModelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.priceModelHeader h3 {
+  margin: 0;
+  color: black;
+}
+
+.priceModelHeaderButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.newVehicleButton,
+.saveButton {
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: 1px solid #254e58;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.newVehicleButton {
+  background-color: #fff;
+  color: #254e58;
+}
+
+.saveButton {
+  background-color: #254e58;
+  color: #fff;
+}
+
+/* Vehicle Categories */
+.vehicleCategories {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #d9d9d92b;
+  border: #0000004a 1px solid;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.vehicleCategories h4 {
+  margin: 0;
+  color: #254e58;
+}
+
+.vehicleCardsWrapper {
+  display: flex;
+  gap: 40px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.vehicleCircleButton {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.vehicleCircleButton svg { 
+  font-size: 40px;
+  color: #254e58;
+}
+.vehicleCircleButton .vehicleImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.vehicleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
+
+.vehicleName {
+  margin: 10px 0 5px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.vehicleSeats {
+  font-size: 12px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Pricing Details Sections */
+.pricingDetails {
+  margin-top: 20px;
+}
+
+.baseFare {
+  align-items: center;
+  background-color: #d9d9d92b;
+  border: #0000004a 1px solid;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between; 
+
+}
+
+.kmRange,
+.extraDetails {
+  background-color: #d9d9d92b;
+  border: #0000004a 1px solid;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start;
+}
+
+.baseFare h4,
+.kmRange h4,
+.extraDetails h4 {
+  margin: 0;
+  color: #254e58;
+  align-items: center;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.inputGroup input[type="text"],
+.inputGroup input[type="number"] {
+  flex: 1 1 100%; 
+  width: 100px;
+  border: #0000004A 1px solid;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* KM Range Section */
+.kmRange {
+  align-items: center;
+}
+
+.kmLines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.kmLine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rangeNum,
+.rangeText {
+  display: inline-block;
+}
+
+.rangeColon {
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.kmLine input[type="number"] {
+  flex: 1 1 60px;
+  width: 100px;
+  border: #0000004A 1px solid;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Add KM Range Button */
+.addKmRange {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.addKmRangeButton {
+  margin-top: 10px;
+  background-color: #fff;
+  color: #254e58;
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: 1px solid #254e58;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Extra Details */
+.extraDetails {
+  align-items: center;
+}
+
+.extraLines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.extraLine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.extraLabel {
+  font-weight: bold;
+}
+
+.extraLabel + .rangeColon {
+  margin: 0 10px;
+}
+
+.extraLine input[type="number"] {
+  flex: 1 1 100px; 
+  width: 100px;
+  border: #0000004A 1px solid;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Modal Overlay and Content */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: 8px;
+  width: 400px;
+  padding: 20px;
+  position: relative;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h4 {
+  margin: 0;
+  color: black;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+hr {
+  margin: 10px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalBody h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  margin-top: 10px;
+}
+
+.modalImageUploadBox {
+  width: 95%;
+  min-height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  gap: 5px;
+  color: #888;
+  padding: 10px;
+}
+
+.uploadIcon {
+  font-size: 40px;
+}
+
+.modalFieldLabel {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: -8px;
+}
+
+.modalInput {
+  width: 95%;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.modalSelect {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* Modal Footer */
+.modalFooter {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  justify-content: space-between;
+  width: 70%;
+  padding: 0 15%;
+}
+
+.modalSubmitButton {
+  padding: 12px 40px;
+  border-radius: 20px;
+  border: 1px solid #254e58;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #254e58;
+  color: #fff;
+}
+
+/* Thank You Pop-up */
+.thankYouOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.thankYouContent {
+  background: #fff;
+  border-radius: 8px;
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+}
+
+.thankYouContent p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.thankYouOKButton {
+  padding: 10px 30px;
+  border-radius: 12px;
+  border: 1px solid #254e58;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #254e58;
+  color: #fff;
+}
+
+.modalButton{
+  padding: 10px 30px;
+  border-radius: 20px;
+  border: 1px solid #254e58;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #254e58;
+  color: #fff;
+}
+.modalButtoncancel{
+  padding: 10px 30px;
+  border-radius: 20px;
+  border: 1px solid #254e58;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #254e58;
+}
+/* Ensuring Main Screen Styles Remain Unaffected */
+/* No changes are made outside of modal-specific classes */

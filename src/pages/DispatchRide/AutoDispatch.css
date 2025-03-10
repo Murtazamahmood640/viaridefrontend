@@ -1,0 +1,351 @@
+.autodispatch-heading {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  margin-left: 10px;
+}
+
+.autodispatch-container {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+
+.autodispatch-details {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #d9d9d933;
+}
+
+.admap-container {
+  flex: 2;
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.adtable-container {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.status-filter {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.status-filter:hover {
+  border-color: #88bdbc;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Adds space between the icon and text */
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #254e58;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #88bdbc;
+}
+
+.button-icon {
+  width: 16px; /* Adjust the size as needed */
+  height: 16px;
+}
+
+.ad-datepicker-wrapper {
+  position: absolute;
+  top: calc(100% + 10px); /* Positions the datepicker below the filter bar */
+  left: 0;
+  z-index: 100;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.ad-custom-datepicker {
+  width: 100%; /* Ensures the datepicker fits within the container */
+  border-radius: 8px; /* Matches the wrapper’s border-radius */
+  font-family: Arial, sans-serif; /* Consistent typography */
+}
+
+.ad-datepicker .react-datepicker__day--selected {
+  background-color: #254e58; /* Selected day theme */
+  color: #fff;
+  border-radius: 50%;
+}
+
+.ad-datepicker .react-datepicker__day:hover {
+  background-color: #88bdbc; /* Hover effect */
+  color: #fff;
+  border-radius: 50%;
+}
+
+
+.ad-requests-table-container {
+  max-height: 400px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Optional border for clarity */
+}
+
+.ad-requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.ad-requests-table th,
+.ad-requests-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+  text-align: center; /* Center-align text */
+  vertical-align: middle; /* Center-align content vertically */
+}
+
+.ad-requests-table th {
+  background-color: #d5ebeb;
+  font-weight: bold;
+  font-size: 12px;
+  position: sticky; /* Make the header stick at the top */
+  top: 0; /* Set the top position for the sticky header */
+  z-index: 10; /* Ensure the header is on top of other content */
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for better separation */
+}
+
+
+.ad-requests-table td {
+  background-color: white;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.ad-status-badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #fff;
+  display: inline-block;
+  text-transform: capitalize;
+ 
+}
+
+.ad-status-badge.assigned {
+  background-color: #2B83F6;
+}
+
+.ad-status-badge.accepted {
+  background-color: #27DE44;
+}
+
+.ad-status-badge.rejected {
+  background-color: #FF0A0A;
+}
+
+.ad-status-badge.unassigned {
+  background-color: #9701B5;
+}
+
+.ad-view-details {
+  color: #007bff;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: solid;
+  font-weight: bold;
+}
+
+
+.ad-override {
+  color: black;
+  font-weight: bold;
+  cursor: default;
+  font-size: 12px;
+}
+
+
+
+
+/* Container for autodispatch information */
+.autodispatch-info {
+  height: 300px; /* Fixed height */
+  padding: 2px; /* Inner padding for spacing */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-row-gap: 3px; /* Gap between rows */
+  grid-column-gap: 10px; /* Gap between columns */
+  font-size: 12px; /* Adjust font size */
+}
+/* Title and text alignment for single-row items */
+.autodispatch-details-header {
+  grid-column: span 2; /* Make the header span the entire width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Title styling */
+.autodispatch-title {
+  font-weight: bold;
+  color: black; /* Darker text */
+  margin-right: 2px; /* Spacing between title and text */
+}
+
+/* Text styling */
+.autodispatch-text {
+  color: #414141; /* Slightly lighter text */
+  margin-left: 4px;
+  font-weight: 500;
+}
+/* Marker container that includes the icon and the text */
+.mapmarker-container {
+  position: relative;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style for the marker icon */
+.mapmarker-icon {
+  width: 30px;
+  height: 30px; /* Customize icon size */
+  cursor: pointer;
+}
+
+/* Style for the marker text */
+.mapmarker-text {
+  margin: 0;
+  font-size: 12px;
+  color: white; 
+  font-weight: bold;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.legend {
+  display: flex;
+  gap: 15px; /* Adjust the space between items */
+  background-color: #fff;
+  border-radius: 12px; /* Rounded corners for the legend container */
+  padding: 10px 20px; /* Padding inside the container */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for styling */
+  border: 1px solid rgb(179, 178, 178);
+}
+
+.legend-colorcode {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the color circle and text */
+}
+.legend-pick{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+.legend-drop{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+.legend-colorcode p {
+  margin: 0;
+  font-size: 12px; /* Adjust text size */
+  font-weight: 500;
+}
+
+.legend-pick p {
+  margin: 0;
+  font-size: 12px; /* Adjust text size */
+  font-weight: 500;
+}
+
+.legend-drop p {
+  margin: 0;
+  font-size: 12px; /* Adjust text size */
+  font-weight: 500;
+}
+
+.legend-colorcode::before {
+  content: '';
+  display: inline-block;
+  width: 12px; /* Size of the circular color indicator */
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-colorcode:nth-child(1)::before {
+  background-color: #27DE44; /* Green for Available */
+}
+
+.legend-colorcode:nth-child(2)::before {
+  background-color: #2B83F6; /* Blue for Assigned */
+}
+
+.legend-colorcode:nth-child(3)::before {
+  background-color: #9701B5; /* Yellow for Unassigned */
+}
+
+.legend-colorcode:nth-child(4)::before {
+  background-color: #FF0A0A; /* Red for Rejected */
+}
+/* Style for the new Pickup item */
+.legend-pick img.marker-icon {
+  width: 15px; /* Reduced size for Pickup icon */
+  height: 15px; /* Adjust according to the icon size */
+}
+
+.legend-drop img.marker-icon {
+  width: 15px; /* Reduced size for Pickup icon */
+  height: 15px; /* Adjust according to the icon size */
+}
+.dis-reset-filter-button {
+  margin-left: auto; /* Push the button to the far right */
+  padding: 10px 20px;
+  background-color: #254e58;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+}
+
+.dis-reset-filter-button:hover {
+  background-color: #88bdbc;
+}
+
+

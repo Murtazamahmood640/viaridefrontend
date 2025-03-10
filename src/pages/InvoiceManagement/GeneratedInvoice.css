@@ -1,0 +1,220 @@
+.generate-invoice-main-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .trip-id {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .invoice-logo {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .logo-image {
+    height: 50px;
+  }
+  
+  .invoice-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .download-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .download-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .download-link {
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    color: #254E58; /* Link color */
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline; /* Optional: Add underline to resemble a link */
+    padding: 0; /* Remove padding */
+  }
+  
+  
+  
+  .invoice-date {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .content-box-generate-invoice {
+    background-color: #ebeaea;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+  
+  .trip-distance-title {
+    margin: 0;
+    font-size: 14px;
+    color: #000;
+    font-weight: 200;
+    margin-bottom: 10px;
+  }
+  
+  .content-box-generate-invoice-rows {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align content to the top */
+    gap: 50%
+  }
+  
+  .content-box-generate-invoice-rows-left {
+    display: flex;
+    flex-direction: row; /* Align image and text in a row */
+    align-items: center; /* Center vertically */
+    gap: 10px; /* Add space between image and text */
+    flex: 1; /* Allow flexible width */
+  }
+
+  
+  .separator-line {
+    border: none; /* Remove default border */
+    height: 1px; /* Set the line thickness */
+    background-color: #ddd; /* Line color */
+    margin: 10px 0; /* Add spacing above and below the line */
+    width: 100%; /* Make it span the container */
+  }
+  
+  .content-box-generate-invoice-rows-left p {
+    font-size: 13px;
+  }
+  
+  .address-icon {
+    width: 10px; /* Adjust size */
+    height: 10px;
+  }
+  
+  .content-box-generate-invoice-rows-right {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    align-items: flex-start; /* Align items to the left */
+    text-align: left; /* Ensure text alignment is left */
+    gap: 5px; /* Add spacing between rows */
+    flex: 1; /* Allow flexible width */
+  }
+  
+  .content-box-generate-invoice-rows-right p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .payment-info-invocie{
+    margin-top: 20px;
+  }
+  .payment-info-invocie p{
+    font-size: 14px;
+  } 
+  
+  .invoice-bottom-table {
+    margin-top: 20px;
+    width: 100%; /* Ensure it spans the full width */
+    padding: 10px 0; /* Add vertical padding */
+  }
+  
+  .invoice-bottom-row-heading  {
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly across the row */
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+  }
+  
+  .left-text-heading {
+    flex: 1; /* Allow flexible width for the left section */
+    text-align: left; /* Align text to the left */
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .center-text-heading {
+    flex: 2; /* Give more space to the center section */
+    text-align: center; /* Align text to the center */
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .right-text-heading {
+    flex: 1; /* Allow flexible width for the right section */
+    text-align: right; /* Align text to the right */
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+
+
+  .invoice-bottom-row {
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly across the row */
+    align-items: center; /* Align items vertically in the center */
+  }
+
+  .left-text {
+    flex: 1; /* Allow flexible width for the left section */
+    text-align: left; /* Align text to the left */
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .center-text {
+    flex: 2; /* Give more space to the center section */
+    text-align: center; /* Align text to the center */
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .right-text {
+    flex: 1; /* Allow flexible width for the right section */
+    text-align: right; /* Align text to the right */
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .invoice-bottom-row:nth-child(3), /* 2nd row (adjusted for heading row) */
+.invoice-bottom-row:nth-child(5) /* 4th row (adjusted for heading row) */ {
+  background-color: #88BDBC; /* Set background color */
+}
+
+.invoice-bottom-row p {
+  padding: 15px 10px; /* Add padding for better spacing */
+  margin: 0; /* Remove default margins */
+  color: #000; /* Optional: Ensure text is readable on the colored background */
+  margin-bottom: 15px;
+}
+
+
+.invoice-calculated .right-text {
+    color: #000; /* Set text color to white */
+    text-align: right; /* Ensure text remains right-aligned */
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  

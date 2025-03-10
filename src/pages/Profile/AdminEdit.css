@@ -1,0 +1,101 @@
+label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+}
+
+label strong {
+    font-size: 18px;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+    font-size: 15px;
+    flex-direction: row;
+}
+.edit-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+  
+.edit-content {
+    display: flex;
+}
+  
+.edit-main {
+    flex: 1;
+    padding: 1%;
+}
+  
+.edit-card {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 1%;
+    padding: 1.6%;
+    background-color: #ffffff;
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    width: 97%;
+}
+
+.edit-image{
+    padding: 0px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.edit-image input {
+  padding: 10px;
+  border-radius: 10%;
+}
+.upload-button {
+    display: flex;
+    margin-top: 2%;
+    background: #254e58;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+.edit-info-line {
+    display: flex;
+    gap: 4%;
+    margin-bottom: 1%;
+    /*font-size: 120%;*/
+}
+.edit-info-line p {
+    font-size: 85%;
+    color: #333; 
+    padding: 0.8% 1.2%;
+}
+.edit-info-line strong {
+    font-weight: bold; 
+    color: #000000;
+}
+.edit-general-info {
+    flex: 1;
+    font-size: 14px;
+}
+
+.profile-save-button {
+    text-decoration: none;
+    margin-top: 6%;
+    padding: 0.9% 1.6%;
+    background-color: #254E58;
+    color: white;
+    font-size: 16px;
+    font-weight: medium;
+    border: none;
+    border-radius: 10%;
+    cursor: pointer; 
+}
+

@@ -1,0 +1,238 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0px;
+  }
+  
+  .driverdetailsviewmore-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.driverdetailsviewmore-content {
+    display: flex;
+}
+
+
+
+.driverdetailsviewmore-main {
+    flex: 1;
+    padding: 1%;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.driverdetailsviewmore-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #ffffff;
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    width: 97%;
+}
+
+.car-pic-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.car-pic {
+    width: 30%;
+    height: auto;
+}
+
+.driverinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: calc(100% - 70px);
+}
+
+.driver-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.driver-reviews {
+    font-size: 15px;
+    color: #666;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.view-more-btn,
+.online-btn {
+    background-color: #ffff;
+    color: #254E58;
+    border: 1px solid #254E58;
+    padding: 8px 25px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.view-more-btn:hover,
+.online-btn:hover {
+    background-color: #254E58;
+    color: #ffff;
+}
+
+.online-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 28px;
+}
+
+.driver-details-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 7%;
+    margin-bottom: 4%;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.driver-details-row div {
+    display: flex;
+    flex-direction: column;
+}
+
+.driver-details-row p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.driver-details-row strong {
+    font-weight: bold;
+    margin-bottom: 5%;
+    font-size: 18px;
+}
+
+.documents-section {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.documents-heading {
+    font-size: 23px;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap; /* Keeps the text on one line */
+}
+
+.separator-line {
+    flex-grow: 1; /* Fills the remaining space */
+    height: 1px;
+    background-color: #ccc; /* Light gray line */
+    margin-left: 1%; /* Adds space between heading and line */
+}
+
+.document-box {
+    display: flex;
+    margin-top: 2%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+  }
+  
+  .document-sidebar {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ccc;
+    background-color: #ffffff;
+  }
+  
+  .document-item {
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #254e58;
+    text-align: left;
+  }
+  
+  .document-item:hover,
+  .document-item.active {
+    background-color: #254e58;
+    color: #ffffff;
+  }
+  
+  .document-content {
+    flex: 2;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .document-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .document-content p {
+    font-size: 21px;
+    font-weight: bold;
+    color: #666;
+  }
+
+
+
+  /* Container to hold buttons */
+.tabs-container {
+    border: 1px solid #254e58;
+    border-radius: 5px;
+    display: flex;
+    overflow: hidden;
+  }
+  
+  /* Button styles */
+  .tab-button {
+    padding: 10px 14px;
+    background-color: white;
+    color: #254e58;
+    border: 1px solid #254e58;
+    border-right: none; /* Prevent double border */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    outline: none;
+  }
+  
+  /* Remove border for the last button */
+  .tab-button:last-child {
+    border-right: 1px solid #254e58;
+  }
+  
+  /* Active tab styles */
+  .tab-button.active {
+    background-color: #254e58;
+    color: #fff;
+  }
+  
+ 

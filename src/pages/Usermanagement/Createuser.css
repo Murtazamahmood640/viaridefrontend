@@ -1,0 +1,446 @@
+/* Main Container */
+.CreateUser-container {
+    display: flex;
+    width: 98%;
+    padding: 20px 1%;
+    gap: 20px;
+  }
+  
+  .form-container {
+    width: 30%; /* Fixed width for consistency */
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-upload {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .image-upload img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  padding: 0;
+  }
+  .upload-button {
+    background: #254e58;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+  
+  .user-formDesign {
+    display: flex;
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 0;
+  }
+  .popup-formDesign {
+    display: flex;
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 0;
+  }
+  
+  .popup-formDesign label {
+    font-size: 13px;
+  }
+  .form-field {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-formDesign input,
+  .user-formDesign button
+{
+    width: 90%;
+    padding: 10px 5%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .popup-formDesign input,
+  .popup-formDesign button 
+{
+    width: 90%;
+    padding: 10px 5%;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .user-formDesign button,
+  .popup-formDesign button,
+  .create-user-button {
+    background: #254e58;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    width: 85%;
+    padding: 10px 10px;
+    font-size: 14px;
+  }
+  
+  .user-formDesign select, .popup-formDesign select {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 5%;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    -webkit-appearance: none; /* For Chrome, Safari, Edge */
+    -moz-appearance: none; /* For Firefox */
+    appearance: none; /* For modern browsers */
+    background: none; /* Remove any default background styles */
+  }
+ .popup-formDesign select {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 5%;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    -webkit-appearance: none; /* For Chrome, Safari, Edge */
+    -moz-appearance: none; /* For Firefox */
+    appearance: none; /* For modern browsers */
+    background: none; /* Remove any default background styles */
+  }
+  
+  
+  /* Password Field */
+  .password-field {
+    width: 100%;
+  }
+  
+  .password-input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+  
+  .password-input-wrapper input {
+    width: 120%;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  
+  /* Table Styles */
+  .table-container {
+    width: 70%; /* Fixed width for consistency */
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-filters {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    width: 100%;
+    gap: 5%;
+  }
+
+  .user-input{
+    position: relative;
+    width: 40%;
+  }
+  .user-select{
+    position: relative;
+    width: 22%;
+  }
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th {
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ddd;
+    text-align: left;
+  }
+  
+  .user-table td {
+    padding: 15px;
+  }
+  .left-input::placeholder{
+    font-size: 14px;
+    color: black;
+  }
+  .form-field input::placeholder{
+    font-size: 14px;
+    color: black;
+  }
+  select::placeholder{
+    font-size: 14px;
+    color: black;
+  }
+  
+  .user-table tr.odd-row {
+    background-color: #fff;
+  }
+  
+  .user-table tr.even-row {
+    background-color: #88BDBC26;
+  }
+  
+  .edit-button,
+  .delete-button {
+    background: none;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    border-radius: 16px;
+    color: #bd2608;
+  }
+  
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .modal-container, .delete-modal-container, .edit-modal-container {
+    background: #fff;
+    position: relative;
+    border-radius: 8px;
+  }
+  
+  /* User Details Modal */
+  .modal-container {
+    width: 25%;
+    padding: 20px;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+  }
+  
+  .modal-header h3 {
+    margin: 0;
+  }
+  
+  .close-icon {
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .model-content {
+    margin-top: 15px;
+  }
+  
+  .user-image-section {
+    text-align: left;
+  }
+  
+  .user-detail-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  
+  .user-detail-name {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .user-info-section {
+    margin-top: 20px;
+  }
+  
+  .info-row {
+    display: flex;
+    margin-bottom: 18px;
+    width: 100%;
+    justify-content: space-between;
+    
+  }
+
+  .info-block{
+    width: 40%;
+    text-align: left;
+  }
+  
+  .info-block label {
+    font-size: 14px;
+    font-weight: 550;
+    color: #8b8a8a;
+  }
+  
+  .info-block p {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .password-block .password-display {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-block input {
+    padding: 5px 30px 5px 0px;
+    border: none ;
+    width: 100px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .password-block .password-toggle {
+    position: absolute;
+    right: 5px;
+    margin-top: -5px;
+    cursor: pointer;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .modal-footer button {
+    margin: 0 10px;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 13px;
+  }
+  
+  .modal-footer .delete-button {
+    background-color: #fff;
+    border: 1px solid #254e58;
+    color: #254e58;
+    font-weight: bold;
+  }
+  
+  .modal-footer .update-button {
+    background-color: #254e58;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  
+  /* Delete Confirmation Modal */
+  .delete-modal-container {
+    width: 22%;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  
+  .delete-icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    margin: 0 auto 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  
+  .delete-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .delete-message {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .delete-modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .cancel-button, .confirm-delete-button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #fff;
+    border: 1px solid #254e58;
+    color: #254e58;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 10px;
+    justify-content: space-between;
+  }
+  
+  .confirm-delete-button {
+    background-color: #254e58;
+    color: #fff;
+    font-weight: bold;
+  border-radius: 12px;
+  padding: 10px;
+  }
+  
+  /* Edit User Modal */
+  .edit-modal-container {
+    width: 25%;
+    padding: 20px;
+  }
+  
+  .edit-modal-content {
+    margin-top: 15px;
+  }
+  
+  .edit-modal-content .user-formDesign {
+    margin-bottom: 0;
+  }
+  

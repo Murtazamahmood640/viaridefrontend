@@ -1,0 +1,344 @@
+/* Main container */
+.security-container {
+  padding: 14px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+  
+  /* Header */
+.security-header h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+  
+  /* Alert box */
+.security-alert-container {
+  margin-bottom: 20px;
+}
+
+.security-alert-box {
+  background-color:rgb(37, 78, 88, 0.13);
+  border-left: 4px solid #254E58;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.security-alert-message p {
+  margin: 5px 0 0;
+  color: #555;
+}
+
+.security-alert-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+}
+  
+  /* Settings section */
+.security-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #9d9d9d;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.security-setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  
+}
+
+.security-setting-description h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.security-setting-description p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.security-toggle-switch {
+  position: relative;
+  width: 40px;
+  height: 20px;
+}
+
+.security-toggle-switch input {
+  display: none;
+}
+
+.security-toggle-switch label {
+  background: #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.security-toggle-switch input:checked + label {
+  background: #4caf50;
+}
+  
+.security-toggle-switch label::after { 
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+  transition: 0.3s;
+}
+
+.security-toggle-switch input:checked + label::after {
+  left: 21px;
+}
+  
+.security-logout-button { 
+  background-color: #d32f2f;
+  color: white;
+  font-size: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  
+.security-logout-button:hover {  
+  background-color: #b71c1c;
+}
+  
+  /* Sessions section */
+.security-sessions-section{
+  padding-left: 8px;
+}
+.security-sessions-section h4 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+  
+.security-sessions-section p{
+  font-size: 18px;
+}
+  
+.security-filter-buttons {    
+  margin-bottom: 15px;
+}
+  
+.security-filter-button {
+  background-color: #254E58;
+  color: white;
+  font-size: 16px;
+  padding: 8px 12px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  
+.security-filter-button:hover {
+  background-color: #00332d;
+}
+  
+  /* Sessions table */
+.security-sessions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-size: 18px;
+  border: 1px solid #9d9d9d;
+  border-radius: 20px;
+
+}
+.security-sessions-table table {
+  padding: 10px;
+}
+.security-sessions-table th, .security-sessions-table td {
+  padding: 12px;  
+  text-align: center;
+}
+
+.security-sessions-table:first-child{
+  border-left: 1px solid #9d9d9d;
+  border-radius: 20px;
+
+}
+  
+.security-sessions-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+  
+.security-sessions-table tr:hover {  
+  background-color: #f9f9f9;
+}
+
+/* Modal Overlay */
+.security-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.security-alert-modal {
+  background-color: #fff; /* White background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  width: 370px;
+  padding: 16px;
+  position: relative; /* For close button positioning */
+  text-align: center;
+}
+
+/* Modal Title */
+.security-alert-modal h3 {
+  font-size: 22px;
+  color: #333; /* Dark gray text */
+}
+
+/* Modal Description */
+.security-alert-modal p {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 20px 0 20px;
+}
+
+.security-close-icon {
+  color: #333;
+  margin-left: 270px;
+}
+.security-close-icon{
+  padding: 8px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Verification Input */
+/* Modal Container */
+.security-verify-modal {
+  background-color: #fff; /* White background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  width: 400px;
+  padding: 20px;
+  position: relative; /* For close button positioning */
+  text-align: center;
+}
+
+/* Modal Title */
+.security-verify-modal h3 {
+  font-size: 22px;
+  color: #333; /* Dark gray text */
+}
+
+/* Modal Description */
+.security-verify-modal p {
+  font-size: 17px;
+  font-weight: bold;
+  color: gray;
+  margin: 15px 0 15px;
+}
+
+.security-verification-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.security-verification-inputs input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.security-verification-inputs input:focus {
+  border-color: #254E58;
+}
+
+/* Buttons */
+.security-confirm-button, .security-verify-button {
+  background-color: #254E58; /* Consistent with your theme */
+  color: white;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.security-resend-button{
+  color: blue;
+  text-decoration: underline;
+  background-color: #fff;
+  border: transparent;
+}
+.security-confirm-button:hover,
+.security-verify-button:hover {
+  background-color: #00332d; /* Darker shade */
+}
+.security-resend-button:hover{
+  background-color: #fef9e7;
+}
+.security-cancel-button {
+  background-color: gray;
+}
+
+.securitycancel-button:hover {
+  background-color: #555;
+}
+
+/* Close Icon */
+.security-modal .security-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
+}
+
+.security-modal .security-close-icon:hover {
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .security-modal {
+    width: 90%; /* Full width for smaller screens */
+    padding: 15px;
+  }
+
+  .security-verification-inputs input {
+    width: 35px;
+    height: 35px;
+  }
+}

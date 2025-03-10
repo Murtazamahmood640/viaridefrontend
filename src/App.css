@@ -1,0 +1,28 @@
+/* Global styles for the app */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f5f7;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 240px; /* Matches the sidebar width */
+}
+
+.content {
+  padding: 20px;
+  margin-top: 70px; /* Matches the height of the topbar */
+}
+
+/* Content styling for pages without sidebar and topbar */
+.content.full-page {
+  margin: 0;
+  padding: 20px;
+}

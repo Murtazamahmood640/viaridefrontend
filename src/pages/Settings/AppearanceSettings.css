@@ -1,0 +1,143 @@
+
+.appearance-settings {
+  padding: 12px;
+  font-family: Arial, sans-serif;
+}
+
+
+
+.appearance-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.appearance-tabs button {
+  background-color: #fff;
+  padding: 10px 20px;
+  border: 1px solid #254E58;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 6px;
+  /*padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;*/
+}
+
+.appearance-tabs .active {
+  background-color: #254E58;
+  color: #fff;
+  /*font-weight: bold;
+  border-bottom: 2px solid #007bff;*/
+}
+
+.appearance-whole-card{
+  background-color: #ffffff;
+  padding: 2%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.appearance-theme-selection {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  height: 110%;
+}
+
+/* Theme cards */
+.appearance-theme-card {
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+  transition: border 0.2s ease-in-out;
+}
+
+.appearance-theme-card:hover {
+  border: 2px solid #007bff;
+}
+
+.appearance-theme-card.selected {
+  border: 2px solid #007bff;
+}
+
+/* Theme preview boxes */
+.appearance-theme-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  margin: 0 auto 10px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appearance-theme-preview.light {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+.appearance-theme-preview.system {
+  background: linear-gradient(135deg, #ffffff 50%, #333333 50%);
+  border: 1px solid #ddd;
+}
+
+.appearance-theme-preview.dark {
+  background-color: #333333;
+  border: 1px solid #222;
+}
+
+.appearance-theme-button {
+  background: #254e58;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.appearance-theme-button:hover {
+  background: #254e58;
+}
+
+/* Action buttons */
+.appearance-actions {
+  text-align: right;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.appearance-cancel-button,
+.appearance-save-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.appearance-cancel-button {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.appearance-save-button {
+  background: #254e58;
+  color: white;
+  font-size: 16px;
+}
+
+.appearance-cancel-button:hover {
+  background: #ddd;
+}
+
+.appearance-save-button:hover {
+  background: #0056b3;
+}

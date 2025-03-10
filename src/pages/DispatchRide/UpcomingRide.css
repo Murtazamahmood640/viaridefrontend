@@ -1,0 +1,467 @@
+.main-content-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Space between upcoming rides and map */
+  padding: 10px;
+  transition: margin-left 0.3s ease;/* Smooth adjustment for collapsible sidebar */
+  background-color: white;
+}
+
+/* For when sidebar is collapsed */
+.main-content-container.sidebar-collapsed {
+  margin-left: 60px; /* Adjust based on sidebar width when collapsed */
+}
+
+/* For when sidebar is expanded */
+.main-content-container.sidebar-expanded {
+  margin-left: 240px; /* Adjust based on sidebar width when expanded */
+}
+
+.upcoming-rides-container {
+  flex: 0.5;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid;
+  border-color: #ccc;
+  max-height: 65vh;
+  overflow-y: auto;
+  scrollbar-width: none; /* For Firefox: Hides the scrollbar */
+}
+
+.upcoming-rides-container::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge: Hides the scrollbar */
+}
+
+
+.upcoming-rides-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.dis-filter-container {
+  display: flex;
+  gap: 10px; /* Space between search and dropdown */
+  margin-bottom: 20px;
+}
+.dis-common-box {
+  flex: none; /* Prevent automatic flex sizing */
+  width: 40%;
+  display: flex;
+  align-items: center;
+  padding: 3px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+}
+
+.dissearch-box {
+  position: relative; /* Needed for the search icon placement */
+}
+
+.dissearch-icon {
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.dissearch-input {
+  flex: 1; /* Fill remaining space */
+  padding-left: 32px; /* Space for the search icon */
+  border: none; /* Remove inner border */
+  outline: none; /* Remove focus outline */
+  font-size: 14px;
+  background-color: transparent;
+}
+
+.dis-status-dropdown {
+  cursor: pointer; /* Add pointer cursor specifically for dropdown */
+}
+
+
+.ride-card:hover {
+  transform: scale(1.02); /* Slightly enlarge the card */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+/* Ride card base styling */
+.ride-card {
+  background: #f9f9f9;
+  padding: 8px; /* Reduced padding to decrease the overall height */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 8px; /* Reduced margin for a more compact look */
+  height: 150px; /* Fixed height for card */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: transform 0.2s, box-shadow 0.2s; /* Add a smooth transition */
+}
+
+/* Add green left border when card is selected */
+.ride-card.selected-card {
+  border-left: 5px solid #254E58;
+  background-color: #f9f9f9; /* Optional: Change background for selected card */
+}
+
+
+.ride-card {
+  background: #f9f9f9;
+  padding: 8px; /* Reduced padding to decrease the overall height */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 8px; /* Reduced margin for a more compact look */
+  height: 150px; /* Fixed height for card */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: transform 0.2s, box-shadow 0.2s; /* Add a smooth transition */
+}
+
+.ride-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 15%; /* Adjusts height to fit within card */
+}
+
+.ride-id {
+  font-size: 16px; 
+  font-weight: bold;
+}
+
+.ride-status {
+  width: 100px; /* Reduced width for smaller status box */
+  height: 25px; /* Reduced height */
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px; /* Smaller font size */
+}
+
+.ride-status.assigned {
+  background-color: #27DE44;
+}
+
+.ride-status.not-assigned {
+  background-color: red;
+}
+
+.ride-vehicle {
+  font-size: 12px; /* Reduced font size for vehicle text */
+}
+
+.ride-location-container {
+  display: flex;
+  flex-direction: column; /* Align the sections vertically */
+  align-items: flex-start; /* Align to the left */
+}
+
+.pickup-section,
+.dropoff-section {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px; /* Smaller font size for location text */
+}
+
+.icon {
+  width: 14px; /* Smaller icon size */
+  height: 14px;
+}
+
+.vertical-line {
+  width: 2px;
+  height: 20px; /* Adjusted line height */
+  background-color: #254E58;
+  margin: 0 6px;
+}
+
+
+/* Map container adjustments */
+.map-container {
+  flex: 1;
+  height: 69vh;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #ccc;
+  overflow: hidden;
+  background-color: white;
+  position: relative;
+  transition: margin-left 0.3s ease; /* Smooth transition for sidebar adjustment */
+}
+
+/* Responsive for sidebar collapse/expand */
+.map-container.sidebar-collapsed {
+  margin-left: 60px;
+}
+
+.map-container.sidebar-expanded {
+  margin-left: 240px;
+}
+.dis-status-select {
+  border: none;
+  background: none;
+  font-size: 14px;
+  margin-left: 8px;
+  outline: none;
+  cursor: pointer;
+  flex: 1; /* Ensures it expands properly */
+}
+.dispatch-buttons {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  background-color: white;
+  width: 90%;
+  height: 50px;
+  border-radius: 12px;
+  border-color: black;
+  border: 1px solid #ccc;
+  padding: 5px; /* Ensure padding inside the container */
+}
+
+.assign-driver {
+  display: flex;
+  align-items: center; /* Align text and icon vertically */
+  gap: 8px; /* Space between the driver image and the text */
+  flex: 1; /* Allow this section to take available space */
+}
+
+.assign-driver-img {
+  background-color: #caf6d1;
+  border-radius: 50%; /* Round shape */
+  border: 1px solid #caf6d1;
+  padding: 5px; /* Add padding to keep the icon inside rounded container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.assign-driver-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.manual-dispatch-btn {
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid #254E58;
+  background-color: #254E58;
+  color: white;
+  font-weight: 600;
+  margin-top: 5px;
+  display: flex;
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  padding: 0 20px; /* Add horizontal padding */
+  cursor: pointer;
+}
+.manual-dispatch-btn:hover {
+  background-color: #88BDBC;
+  border: none;
+}
+
+.dispatch-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure modal is on top */
+}
+
+.up-modal-content {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow-y: auto; /* Ensure content scrolls if too large */
+  max-height: calc(100vh - 100px); /* Adjust max-height to fit within the screen */
+  padding-top: 50px; /* Adjust padding to avoid overlap with the top bar */
+}
+
+.dispatch-modal-header {
+  background-color: #88bdbc84; /* Green box background */
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensure the header stays on top */
+}
+
+.up-modal-details {
+  margin-top: 10px; /* Ensure space below the modal header */
+  margin-bottom: 4px;
+}
+
+.up-modal-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between rows */
+}
+
+.up-modal-details-info p {
+  margin: 0;
+}
+
+.up-modal-details-title {
+  color: grey;
+  font-weight: bold;
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+}
+
+.up-modal-details-text {
+  color: black;
+  flex: 2;
+  text-align: left;
+  /* margin-left: 5px;  */
+  font-size: 12px;
+}
+
+.up-modal-details-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  font-size: 25px;
+  color: black;
+  cursor: pointer;
+}
+
+.close-modal-btn:hover {
+  color: #ff0000; /* Red color on hover for emphasis */
+}
+
+
+.up-driver-title{
+  font-size: 14px;
+  font-weight: bold;
+}
+.up-driver-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.up-driver-table th,
+.up-driver-table td {
+  padding: 8px 5px; /* Adjusted padding for spacing without enlarging the table */
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevents text wrapping */
+  text-align: center;
+  box-sizing: border-box; /* Ensures padding doesn't increase cell size */
+}
+
+.up-driver-table th {
+  background-color: white; /* Green background for table headers */
+  color: black;
+  font-size: 12px;
+  border: 1px solid;
+  border-color: #ccc;
+}
+
+.up-driver-table td {
+  font-size: 12px;
+  border: 1px solid;
+  border-color: #ccc;
+
+}
+
+.up-driver-table tr:hover {
+  background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+
+.up-driver-select-text{
+  font-size: 14px;
+  font-weight: bold;
+
+}
+
+.up-driver-dropdown {
+  flex-grow: 1;
+}
+
+.up-dropdown-select {
+  width: 40%;
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.up-dropdown-select option {
+  padding: 10px;
+  font-size: 13px;
+}
+
+.up-modal-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.up-dispatch-ride-btn {
+  background: #254e58;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;  
+  flex-shrink: 0;
+  
+}
+.up-dispatch-ride-btn:hover {
+  background-color: #88BDBC;
+}
+/* Marker container that includes the icon and the text */
+.marker-container {
+  position: relative;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style for the marker icon */
+.marker-icon {
+  width: 30px;
+  height: 30px; /* Customize icon size */
+}
+
+/* Style for the marker text */
+.marker-text {
+  margin: 0;
+  font-size: 12px;
+  color: white; 
+}

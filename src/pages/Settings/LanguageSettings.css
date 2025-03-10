@@ -1,0 +1,257 @@
+/* Main container styling */
+.languages-system-settings {
+  font-family: Arial, sans-serif;
+  padding: 12px;
+}
+
+/* Header styling */
+.languages-header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.languages-header h1 {
+  font-size: 24px;
+  color: #333;
+}
+.languages-tabs {
+  display: flex;
+  gap: 10px;
+}
+.languages-tabs button {
+  background-color: #fff;
+  padding: 10px 20px;
+  border: 1px solid #254E58;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.languages-tabs .active {
+  background-color: #254E58;
+  /*border-radius: 5px;*/
+  color: #fff;
+}
+
+/* Default language section styling */
+.default-language-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.default-language-section h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: #254E58;
+}
+
+.default-language-section p {
+  font-size: 18px;
+  margin-bottom: 0px;
+  display: flexbox;
+}
+
+.select-language {
+  display: flexbox;
+  align-items: center;
+  gap: 90px;
+  margin-left: 550px;
+}
+
+.select-language label {
+  font-weight: bold;
+}
+
+.select-language input {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: white;
+  cursor: not-allowed;
+}
+
+/* Languages list section styling */
+.languages-list-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.languages-list-section h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.add-language-button {
+  float: right;
+  background-color: #254E58;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.languages-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.languages-table th,
+.languages-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+.languages-table thead th {
+  background-color: #f0f0f0;
+}
+
+/* Toggle switch styling */
+.languages-switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+  margin-top: 5px;
+}
+
+.languages-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.languages-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.languages-slider::before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .languages-slider {
+  background-color: #254E58;
+}
+
+input:checked + .languages-slider::before {
+  transform: translateX(14px);
+}
+
+/* Delete button styling */
+.languages-delete-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #d9534f;
+}
+
+/* Modal styling */
+.languages-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
+.languages-modal-content {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.languages{
+  margin-bottom: 12px;
+}
+
+.languages-modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.languages-modal-body label {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-weight:normal;
+  font-size: 17px;
+}
+
+.languages-modal-body input,
+.languages-modal-body select {
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.languages-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.languages-close-icon{
+  padding: 8px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.languages-close-button,.languages-add-button {
+  padding: 12px 22px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.languages-close-icon {
+  color: #333;
+  margin-left: 199px;
+}
+
+.languages-add-button {
+  background-color: #254E58;
+  color: white;
+}
+
+.languages-close-button:hover,
+.languages-add-button:hover {
+  opacity: 0.9;
+}

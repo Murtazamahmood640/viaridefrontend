@@ -1,0 +1,105 @@
+/* Overall page styling */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #ffffff;
+    margin: 0;
+  }
+  
+  /* Header styling */
+  .login-header {
+    display: flex;
+    align-items: center;
+    height: 15vh;
+    width: 100%;
+    border-bottom: 1px solid #003530;
+  }
+  
+  .login-header img {
+    width: 8%;
+    padding-left: 20px; /* Adjusted padding for the logo */
+  }
+  
+  /* Content styling */
+  .login-content {
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Login card styling */
+  .login-card {
+    width: 33%;
+    padding: 30px; /* Added consistent padding for the card */
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-card h2 {
+    margin-bottom: 20px; /* Adjusted spacing below heading */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  /* Form group styling */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 80%; /* Input fields take 80% of the form width */
+    margin: 0 auto 20px auto; /* Center the fields and add bottom margin */
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    padding-left: 10px; /* Padding on the left for the labels */
+    margin-bottom: 10px; /* Space between the label and input */
+    color: #333333;
+  }
+  
+  .form-group input {
+    width: 90%; /* Input spans full width of its container */
+    padding: 10px 5%; /* Padding inside the input box */
+    font-size: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input:focus {
+    border-color: #004d40;
+  }
+  
+  /* Button styling */
+  .login-button {
+    width: 80%; /* Matches form width */
+    padding: 10px 0; /* Vertical padding for button */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #004d40;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+  }
+  
+  .login-button:hover {
+    background-color: #003530;
+    transform: scale(1.02);
+  }
+  
+  .login-button:active {
+    transform: scale(1);
+  }
+  

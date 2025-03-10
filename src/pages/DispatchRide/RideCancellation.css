@@ -1,0 +1,487 @@
+.ride-cancellation {
+  padding: 10px;
+}
+
+.rc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+
+}
+
+.rc-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.rc-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.rc-left-group {
+  display: flex;
+  gap: 5px; /* Gap between search, dropdown, and button */
+}
+
+.rc-common-box {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+}
+
+.rcsearch-box {
+  position: relative;
+}
+
+.rc-search-icon {
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.rc-search-input {
+  flex: 1;
+  padding: 0 0 0 32px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background-color: transparent;
+}
+
+.rc-status-select {
+  border: none;
+  background: none;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.rc-filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #254e58;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.rc-button-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.rc-legend {
+  display: flex;
+  gap: 15px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(230, 229, 229);
+}
+
+.rc-legend-colorcode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rc-legend-colorcode p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.rc-legend-colorcode::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.rc-legend-colorcode:nth-child(1)::before {
+  background-color: #27de44;
+}
+
+.rc-legend-colorcode:nth-child(2)::before {
+  background-color: #a09f9f;
+}
+
+.rc-legend-colorcode:nth-child(3)::before {
+  background-color: #2b83f6;
+}
+
+.rc-legend-colorcode:nth-child(4)::before {
+  background-color: #ff0a0a;
+}
+
+.rc-requests-table-container {
+  max-height: 450px; /* Set maximum height for the table */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Optional border */
+}
+
+.rc-ride-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rc-ride-table th,
+.rc-ride-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+  text-align: center; /* Center-align text */
+  vertical-align: middle; /* Center-align content vertically */
+}
+
+.rc-ride-table th {
+  background-color: #d5ebeb;
+  font-weight: bold;
+  font-size: 12px;
+  position: sticky; /* Make the header stick at the top */
+  top: 0; /* Set the top position for the sticky header */
+  z-index: 100; /* Ensure the header is above table rows */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1); /* Add a shadow for clarity */
+}
+
+.rc-ride-table td {
+  background-color: white;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.rc-status-badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #fff;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.rc-status-badge.pending {
+  background-color: #a09f9f;
+}
+
+.rc-status-badge.completed {
+  background-color: #27de44;
+}
+
+.rc-status-badge.not-available {
+  background-color: #ff0a0a;
+}
+
+.rc-status-badge.reassigned {
+  background-color: #2b83f6;
+}
+
+.rc-view-details {
+  color: #007bff;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: solid;
+  font-weight: bold;
+}
+
+.rc-reassign {
+  color: black;
+  font-weight: bold;
+  cursor: default;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.rc-assign {
+  color: black;
+  font-weight: bold;
+  cursor: default;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.rc-notify-passenger {
+  color: black;
+  font-weight: bold;
+  cursor: default;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Datepicker Wrapper */
+.rc-datepicker-wrapper {
+  position: absolute; /* Allows positioning relative to the parent */
+  top: calc(100% + 10px); /* Positions below the button */
+  left: 0; /* Aligns with the button's left side */
+  z-index: 1050; /* Ensures it appears above other elements */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: block; /* Ensures it's visible */
+  width: max-content; /* Keeps the width compact */
+}
+
+/* Custom Datepicker Styles */
+.rc-custom-datepicker {
+  width: 100%; /* Ensures the datepicker fits its wrapper */
+  border-radius: 8px; /* Matches the wrapper’s border-radius */
+  font-family: Arial, sans-serif; /* Consistent typography */
+}
+
+/* Datepicker Calendar Styling */
+.rc-datepicker .react-datepicker {
+  border-radius: 8px; /* Smooth edges for the calendar */
+  z-index: 1060; /* Ensure calendar items appear above others */
+  overflow: hidden; /* Prevent visual overflow issues */
+}
+
+.rc-datepicker .react-datepicker__header {
+  background-color: #f8f9fa; /* Light background for header */
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 8px 8px 0 0; /* Rounded top edges */
+}
+
+.rc-datepicker .react-datepicker__day:hover {
+  background-color: #88bdbc; /* Hover effect */
+  color: #fff;
+  border-radius: 50%;
+}
+
+.rc-datepicker .react-datepicker__day--selected {
+  background-color: #254e58; /* Selected day theme */
+  color: #fff;
+  border-radius: 50%;
+}
+
+.rc-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.059); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure modal is on top */
+}
+
+.rc-modal-content {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow-y: auto; /* Ensure content scrolls if too large */
+  max-height: calc(100vh - 100px); /* Adjust max-height to fit within the screen */
+  padding-top: 50px; /* Adjust padding to avoid overlap with the top bar */
+}
+
+.rc-modal-header {
+  background-color: #88bdbc84; /* Green box background */
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensure the header stays on top */
+}
+.rc-modal-title{
+  font-size: 16px;
+  font-weight: bold;
+}
+.rc-modal-details {
+  margin-top: 10px; /* Ensure space below the modal header */
+  margin-bottom: 4px;
+}
+
+.rc-modal-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between rows */
+}
+
+.rc-modal-details-info p {
+  margin: 0;
+}
+
+.rc-modal-details-title {
+  color: grey;
+  font-weight: bold;
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+}
+
+.rc-modal-details-text {
+  color: black;
+  flex: 2;
+  text-align: left;
+  /* margin-left: 5px;  */
+  font-size: 12px;
+}
+
+.rc-modal-details-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.rc-close-modal-btn {
+  background: transparent;
+  border: none;
+  font-size: 25px;
+  color: black;
+  cursor: pointer;
+}
+
+.rc-close-modal-btn:hover {
+  color: #ff0000; /* Red color on hover for emphasis */
+}
+
+.rc-driver-title{
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+}
+.rc-driver-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.rc-driver-table th,
+.rc-driver-table td {
+  padding: 8px 5px; /* Adjusted padding for spacing without enlarging the table */
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevents text wrapping */
+  text-align: center;
+  box-sizing: border-box; /* Ensures padding doesn't increase cell size */
+}
+
+.rc-driver-table th {
+  background-color: white; /* Green background for table headers */
+  color: black;
+  font-size: 12px;
+  border: 1px solid;
+  border-color: #ccc;
+}
+
+.rc-driver-table td {
+  font-size: 12px;
+  border: 1px solid;
+  border-color: #ccc;
+
+}
+
+.rc-driver-table tr:hover {
+  background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+
+.rc-driver-select-text{
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+}
+
+
+.rc-dropdown-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rc-dropdown-select option {
+  padding: 10px;
+  font-size: 13px;
+}
+
+.rc-modal-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rc-ride-btn {
+  background: #254e58;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;  
+  flex-shrink: 0;
+  
+}
+.rc-ride-btn:hover {
+  background-color: #88BDBC;
+}
+
+.rc-reason-title{
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 25px;
+
+}
+
+.rc-reason-text{
+  text-align: left;
+  font-size: 12px;
+  margin-bottom: 10px;
+  font-weight: 500;
+
+}
+.rc-reset-filter-button {
+  margin-left: auto; /* Push the button to the far right */
+  padding: 10px 20px;
+  background-color: #254e58;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+}
+
+.rc-reset-filter-button:hover {
+  background-color: #88bdbc;
+}

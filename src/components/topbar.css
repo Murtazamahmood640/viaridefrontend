@@ -1,0 +1,209 @@
+/* TopBar Styling */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 50px;
+  background-color: white;
+  color: black;
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  border-bottom: 1px solid #254e58;
+  overflow: hidden;
+  flex-direction: row;
+  margin: 0 10px;
+}
+
+
+.logo {
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.search-form {
+  /* background-color: #f5f5f5; */
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 20px;
+  width: 350px;
+  border: 2px solid #f5f5f5;
+}
+
+/* Styling for the search input */
+.search-input {
+  width: 90%;
+  padding: 10px 10% !important; /* Add padding for the icon */
+  font-size: 14px;
+  outline: none; /* Remove the outline by default */
+  border: none; /* Remove the border of input */
+  background-color: transparent !important; /* Keep the input transparent for the icon to show up clearly */
+}
+
+/* Remove the default outline on focus */
+.search-input:focus {
+  outline: none; /* Ensure there's no outline on focus */
+}
+
+/* Styling for search icon */
+.search-icon {
+  position: absolute;
+  right: 12px; /* Place the icon inside the input field */
+  color: #888;
+  pointer-events: none; /* Prevent the icon from interfering with typing */
+}
+
+.top-menu {
+  display: flex;
+  align-items: center;
+}
+
+.top-link {
+  color: #254e58;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.top-link:hover {
+  color: #3498db;
+}
+
+.profile-icon {
+  margin-left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.top-menu a svg {
+  margin-right: 5px;
+  font-size: 24px;
+}
+
+/* Responsive Styling for smaller screens */
+@media (max-width: 768px) {
+  /* Adjust the top-bar layout for smaller screens (mobile) */
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px; /* Reduce padding */
+  }
+
+  /* Adjust the search form for smaller screens */
+  .search-form {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .search-input {
+    font-size: 13px; /* Adjust font size for smaller screens */
+    padding: 8px 35px 8px 12px; /* Reduce padding */
+  }
+
+  .search-icon {
+    right: 10px; /* Adjust icon position */
+  }
+
+  /* Top menu items (links and profile icon) */
+  .top-menu {
+    width: 100%;
+    margin-top: 15px;
+    justify-content: space-between;
+  }
+
+  .top-link {
+    font-size: 14px; /* Reduce font size */
+    margin-left: 10px; /* Reduce margin */
+  }
+
+  /* Profile icon adjustments */
+  .profile-icon {
+    font-size: 25px; /* Reduce size */
+    margin-left: 15px;
+  }
+}
+
+/* Tablet (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 40px; /* Adjust padding for tablet */
+  }
+
+  .search-form {
+    width: 300px; /* Reduce width for tablet */
+  }
+
+  .top-link {
+    font-size: 15px; /* Adjust font size */
+    margin-left: 18px; /* Adjust margin */
+  }
+
+  .profile-icon {
+    font-size: 28px; /* Adjust profile icon size */
+  }
+}
+
+/* Small Laptop (1024px to 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .top-bar {
+    padding: 25px 50px; /* Maintain standard padding */
+  }
+
+  .search-form {
+    width: 350px; /* Standard width */
+  }
+
+  .top-link {
+    font-size: 26px; /* Keep the font size consistent */
+    margin-left: 20px;
+  }
+
+  .profile-icon {
+    font-size: 30px; /* Profile icon size remains same */
+  }
+}
+
+/* Larger Laptop and Desktop (1366px and above) */
+@media (min-width: 1366px) {
+  .top-bar {
+    padding: 25px 60px; /* Increase padding for larger screens */
+  }
+
+  .search-form {
+    width: 400px; /* Slightly wider search bar */
+  }
+
+  .top-link {
+    font-size: 32px; /* Larger font size */
+  }
+
+  .profile-icon {
+    font-size: 32px; /* Slightly larger profile icon */
+  }
+}
+
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+}
