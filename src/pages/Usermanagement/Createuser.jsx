@@ -50,7 +50,7 @@ const UserManagement = () => {
   useEffect(() => {
     axios
 
-      .get("http://localhost:4000/api/viaRide/createuser")
+      .get("https://viaridebackend.vercel.app/api/viaRide/createuser")
 
       .then((response) => {
         setUsers(response.data);
@@ -85,7 +85,7 @@ const UserManagement = () => {
 
       axios
 
-        .post("http://localhost:4000/api/viaRide/createuser", newUser)
+        .post("https://viaridebackend.vercel.app/api/viaRide/createuser", newUser)
 
         .then((response) => {
           setUsers([...users, response.data]);
@@ -136,7 +136,7 @@ const UserManagement = () => {
       axios
 
         .delete(
-          `http://localhost:4000/api/viaRide/createuser/${userToDelete._id}`
+          `https://viaridebackend.vercel.app/api/viaRide/createuser/${userToDelete._id}`
         )
 
         .then((response) => {
@@ -204,7 +204,7 @@ const UserManagement = () => {
       axios
 
         .put(
-          `http://localhost:4000/api/viaRide/createuser/${selectedUser._id}`,
+          `https://viaridebackend.vercel.app/api/viaRide/createuser/${selectedUser._id}`,
 
           updatedUser
         )

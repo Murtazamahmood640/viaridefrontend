@@ -31,7 +31,7 @@ const Dispatcher = () => {
   const [selectedDispatcher, setSelectedDispatcher] = useState(null);
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
  
-  const API_URL = "http://localhost:4000/api/ViaRide/dispatcher";
+  const API_URL = "https://viaridebackend.vercel.app/api/ViaRide/dispatcher";
 
   // Close popup
   const closePopup = () => {

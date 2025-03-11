@@ -30,7 +30,7 @@ const Accountant = () => {
   const [accountants, setAccountants] = useState([]);
 
 
-  const API_URL = "http://localhost:4000/api/ViaRide/accountant";
+  const API_URL = "https://viaridebackend.vercel.app/api/ViaRide/accountant";
 
   // Close popup
   const closePopup = () => {

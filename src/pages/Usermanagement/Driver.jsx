@@ -33,7 +33,7 @@ const Driver = () => {
   const [ratingFilter, setRatingFilter] = useState("");
   const [drivers, setDrivers] = useState([]);
  
-  const API_URL = "http://localhost:4000/api/ViaRide/allDriver";
+  const API_URL = "https://viaridebackend.vercel.app/api/ViaRide/allDriver";
   // Close popup
   const closePopup = () => {
     setPopupOpen(false);

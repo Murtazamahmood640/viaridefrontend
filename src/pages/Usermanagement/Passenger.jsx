@@ -28,7 +28,7 @@ const Passenger = () => {
   const [deletePopupOpen, setDeletePopupOpen] = useState(false); // Toggle for delete confirmation popup
   const [passengers, setPassengers] = useState([]);
 
-  const API_URL = "http://localhost:4000/api/ViaRide/createPassenger";
+  const API_URL = "https://viaridebackend.vercel.app/api/ViaRide/createPassenger";
   // Close popup
   const closePopup = () => {
     setPopupOpen(false);

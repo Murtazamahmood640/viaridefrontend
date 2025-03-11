@@ -1,168 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaSearch, FaChevronDown, FaCalendarAlt } from "react-icons/fa";
 import BookingDetailsPopup from "./StatusPopup"; 
+import axios from "axios";  // You can use Axios for making API calls
 
 const BookingScreen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [dateFilter, setDateFilter] = useState(null);
-
+  
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [selectedTrip, setSelectedTrip] = useState(null);
 
-  // Demo incidents
-  const incidents = [
-    {
-      id: "001",
-      passengerName: "Joe Beer",
-      bookingDate: "15 Oct 2024 at 08:07:23",
-      driver: "John Ray",
-      vehicleType: "Sedan",
-      fare: "PKR 560",
-      status: "Booked",
-      bookingFor: "Self",
-      vehicleNumber: "BET-123",
-      pickUp: "Melbrew Cafe, Clifton",
-      dropOff: "Ocean Mall, Clifton",
-      paymentType: "Cash",
-      preBookingFor: "15 Oct 2023 at 08:07:23",
-      rideNow: false,
-    },
-    {
-      id: "002",
-      passengerName: "Lauren Price",
-      bookingDate: "12:15, Nov 3",
-      driver: "David Brown",
-      vehicleType: "Sedan",
-      fare: "PKR 560",
-      status: "Cancel",
-      bookingFor: "Self",
-      vehicleNumber: "ABC-789",
-      pickUp: "Airport",
-      dropOff: "Hotel Metro",
-      paymentType: "Cash",
-      preBookingFor: "N/A",
-      rideNow: true,
-    },
-    {
-      id: "003",
-      passengerName: "Mark Kim",
-      bookingDate: "09:45, Dec 1",
-      driver: "Andrew John",
-      vehicleType: "Hatchback",
-      fare: "PKR 420",
-      status: "Booked",
-      bookingFor: "Self",
-      vehicleNumber: "ABH-234",
-      pickUp: "Main Boulevard, Gulberg",
-      dropOff: "Liberty Market, Gulberg",
-      paymentType: "Cash",
-      preBookingFor: "N/A",
-      rideNow: true,
-    },
-    {
-      id: "004",
-      passengerName: "Sarah Mitchell",
-      bookingDate: "16:25, Dec 1",
-      driver: "Rebecca Town",
-      vehicleType: "SUV",
-      fare: "PKR 780",
-      status: "Completed",
-      bookingFor: "Self",
-      vehicleNumber: "SUV-984",
-      pickUp: "Model Town Park",
-      dropOff: "Emporium Mall",
-      paymentType: "Credit Card",
-      preBookingFor: "N/A",
-      rideNow: true,
-    },
-    {
-      id: "005",
-      passengerName: "Abel Gaylord",
-      bookingDate: "07:10, Nov 20",
-      driver: "Mark Miller",
-      vehicleType: "Sedan",
-      fare: "PKR 560",
-      status: "Cancel",
-      bookingFor: "Self",
-      vehicleNumber: "XYZ-456",
-      pickUp: "Downtown Station",
-      dropOff: "Town Square",
-      paymentType: "Credit Card",
-      preBookingFor: "N/A",
-      rideNow: false,
-    },
-    {
-      id: "006",
-      passengerName: "Emily Davis",
-      bookingDate: "13:35, Dec 2",
-      driver: "Anderson Cooper",
-      vehicleType: "Sedan",
-      fare: "PKR 650",
-      status: "Booked",
-      bookingFor: "Self",
-      vehicleNumber: "TTT-789",
-      pickUp: "Iqbal International Airport",
-      dropOff: "DHA Phase 5",
-      paymentType: "Cash",
-      preBookingFor: "12 Dec 2024 at 14:00:00",
-      rideNow: false,
-    },
-    {
-      id: "007",
-      passengerName: "Evelyn Rose",
-      bookingDate: "11:20, Dec 5",
-      driver: "Joshua Pearl",
-      vehicleType: "Hatchback",
-      fare: "PKR 430",
-      status: "Completed",
-      bookingFor: "Self",
-      vehicleNumber: "HBC-007",
-      pickUp: "Old Anarkali",
-      dropOff: "Museum Road",
-      paymentType: "Cash",
-      preBookingFor: "N/A",
-      rideNow: true,
-    },
-    {
-      id: "008",
-      passengerName: "Tom Andrews",
-      bookingDate: "19:05, Dec 7",
-      driver: "Carlos Lima",
-      vehicleType: "SUV",
-      fare: "PKR 900",
-      status: "Booked",
-      bookingFor: "Self",
-      vehicleNumber: "SUV-567",
-      pickUp: "New City Terminal",
-      dropOff: "Royal Gardens",
-      paymentType: "Credit Card",
-      preBookingFor: "N/A",
-      rideNow: true,
-    },
-    {
-      id: "009",
-      passengerName: "Ava Johnson",
-      bookingDate: "21:30, Dec 10",
-      driver: "Michael Green",
-      vehicleType: "Sedan",
-      fare: "PKR 560",
-      status: "Cancel",
-      bookingFor: "Self",
-      vehicleNumber: "CAR-777",
-      pickUp: "Carnation Street, Gulshan",
-      dropOff: "Centaurus Mall",
-      paymentType: "Cash",
-      preBookingFor: "N/A",
-      rideNow: true,
-    },
-    
-  ];
+  // State for storing fetched trips from the API
+  const [trips, setTrips] = useState([]);
+  
+  useEffect(() => {
+    // Fetch the trip data from your API when the component mounts
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://viaridebackend.vercel.app/api/viaRide/trips-getting-values");  // Replace with your Trip API URL
+        setTrips(response.data); // Assuming the response data is an array of trips
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const totalEntries = 50;
+    fetchData();
+  }, []);
+
+  const totalEntries = trips.length;
   const entriesPerPage = 7;
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
 
@@ -172,14 +41,14 @@ const BookingScreen = () => {
     }
   };
 
-  const filteredIncidents = incidents.filter((incident) => {
+  const filteredTrips = trips.filter((trip) => {
     const matchesSearch =
-      incident.passengerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      incident.vehicleType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      incident.fare.toLowerCase().includes(searchTerm.toLowerCase());
+      trip.tripPassanger.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      trip.tripVehicleType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      trip.tripFare.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesStatus = statusFilter
-      ? incident.status.toLowerCase() === statusFilter.toLowerCase()
+      ? trip.tripStatus.toLowerCase() === statusFilter.toLowerCase()
       : true;
 
     let matchesDate = true;
@@ -188,13 +57,13 @@ const BookingScreen = () => {
         month: "short",
         day: "numeric",
       });
-      matchesDate = incident.bookingDate.includes(dateString);
+      matchesDate = trip.scheduledDate.includes(dateString);
     }
 
     return matchesSearch && matchesStatus && matchesDate;
   });
 
-  const displayedIncidents = filteredIncidents.slice(
+  const displayedTrips = filteredTrips.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
@@ -210,19 +79,19 @@ const BookingScreen = () => {
   };
 
   // Clicking status => open popup
-  const handleStatusClick = (incident) => {
-    setSelectedBooking(incident);
+  const handleStatusClick = (trip) => {
+    setSelectedTrip(trip);
     setShowPopup(true);
   };
 
   const closePopup = () => {
     setShowPopup(false);
-    setSelectedBooking(null);
+    setSelectedTrip(null);
   };
 
   return (
     <div className="user-management">
-      <h2 className="page-title">Bookings</h2>
+      <h2 className="page-title">Trips</h2>
       <div className="filters">
         <div className="left">
           <div className="dispatcher-input-container">
@@ -273,9 +142,9 @@ const BookingScreen = () => {
         <table className="user-table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Trip ID</th>
               <th>Passenger</th>
-              <th>Booking Date</th>
+              <th>Scheduled Date</th>
               <th>Status</th>
               <th>Driver</th>
               <th>Vehicle Type</th>
@@ -283,20 +152,20 @@ const BookingScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {displayedIncidents.map((incident) => (
-              <tr key={incident.id}>
-                <td>{incident.id}</td>
-                <td>{incident.passengerName}</td>
-                <td>{incident.bookingDate}</td>
+            {displayedTrips.map((trip) => (
+              <tr key={trip.tripID}>
+                <td>{trip.tripID}</td>
+                <td>{trip.tripPassanger}</td>
+                <td>{trip.scheduledDate}</td>
                 <td
                   style={{ cursor: "pointer", textDecoration: "underline" }}
-                  onClick={() => handleStatusClick(incident)}
+                  onClick={() => handleStatusClick(trip)}
                 >
-                  {incident.status}
+                  {trip.tripStatus}
                 </td>
-                <td>{incident.driver}</td>
-                <td>{incident.vehicleType}</td>
-                <td>{incident.fare}</td>
+                <td>{trip.tripDriver}</td>
+                <td>{trip.tripVehicleType}</td>
+                <td>{trip.tripFare}</td>
               </tr>
             ))}
           </tbody>
@@ -339,7 +208,7 @@ const BookingScreen = () => {
       </div>
 
       {showPopup && (
-        <BookingDetailsPopup booking={selectedBooking} onClose={closePopup} />
+        <BookingDetailsPopup trip={selectedTrip} onClose={closePopup} />
       )}
     </div>
   );
