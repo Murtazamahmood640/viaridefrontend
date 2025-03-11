@@ -226,7 +226,7 @@ const closeDeclinePopup = () => {
 <div className="popup-documents-popup">
   <div className="document-item-popup">
     <img src={BankAccount} alt="Bank Account Details" />
-    <p>Vehicle<br/> Registration <br/> Book</p>
+    <p>Registration <br/> Book</p>
   </div>
   <div className="document-item-popup">
     <img src={Profile} alt="Profile" />

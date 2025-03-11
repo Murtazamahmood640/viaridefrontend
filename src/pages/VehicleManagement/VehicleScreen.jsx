@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+
 import "../Usermanagement/users.css";
 import {
   FaSearch,
@@ -10,49 +12,38 @@ import {
   FaPencilAlt,
   FaStar,
 } from "react-icons/fa";
-import { MdStar } from "react-icons/md";
-import { RxCaretSort } from "react-icons/rx";
 import { BsTrash3 } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // import styles for the date picker
 import Car from "../../Assets/SidebarDropdownIcons/Car_Image.png";
-const VehicleScreen= () => {
+
+const VehicleScreen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
-  const [selectedDateRange, setSelectedDateRange] = useState([null, null]); // Start and end date in one state
-  const [calendarOpen, setCalendarOpen] = useState(false); // Manage calendar open state
+  const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [editedDriver, setEditedDriver] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [selectedDriver, setSelectedDriver] = useState(null);
-  const [deletePopupOpen, setDeletePopupOpen] = useState(false); // Toggle for delete confirmation popup
+  const [deletePopupOpen, setDeletePopupOpen] = useState(false);
   const [ratingFilter, setRatingFilter] = useState("");
+  const [drivers, setDrivers] = useState([]);
 
-  const [drivers, setDrivers] = useState([
-    { id: 1, make: "Toyota Yaris", type: "Sedan", color: "White", year: 2022, owner: "John Ray", licensePlateNo: "BET-123", chassisNumber: "1HGCM82633A123456", fuel: "Petrol" ,engine:'1900',status:"Active"},
-    { id: 2, make: "Honda City", type: "Sedan", color: "Grey", year: 2020, owner: "David Brown", licensePlateNo: "BTD-523", chassisNumber: "1HGCM82633A123456", fuel: "Petrol" ,engine:'1900',status:"Active"},
-    { id: 3, make: "Toyota Yaris", type: "Sedan", color: "Silver", year: 2021, owner: "Mark Kim", licensePlateNo: "BAF-734", chassisNumber: "MA3EYD32S007004AN", fuel: "Petrol" ,engine:'1900',status:"Active"},
-    { id: 4, make: "Toyota Corolla", type: "Sedan", color: "Black", year: 2022, owner: "Joshua", licensePlateNo: "BYT-009", chassisNumber: "1HGCM82633A123456", fuel: "Petrol",engine:'1900',status:"Active" },
-    { id: 5, make: "Suzuki Alto", type: "Hatchback", color: "Blue", year: 2019, owner: "Anderson", licensePlateNo: "BAF-999", chassisNumber: "MA3EYD32S007004AN", fuel: "Petrol",engine:'1900',status:"Active" },
-    { id: 6, make: "Suzuki Alto", type: "Hatchback", color: "Blue", year: 2019, owner: "Anderson", licensePlateNo: "BAF-999", chassisNumber: "MA3EYD32S007004AN", fuel: "Petrol" ,engine:'1900',status:"Active"},
-    { id: 7, make: "Toyota Corolla", type: "Sedan", color: "Brown", year: 2023, owner: "Mark Miller", licensePlateNo: "BAS-999", chassisNumber: "MA3EYD32S007004AN", fuel: "Petrol",engine:'1900',status:"Active" },
-    { id: 8, make: "Toyota Yaris", type: "Sedan", color: "White", year: 2022, owner: "John Ray", licensePlateNo: "BET-123", chassisNumber: "1HGCM82633A123456", fuel: "Petrol",engine:'1900',status:"Active" },
-    { id: 9, make: "Honda City", type: "Sedan", color: "Grey", year: 2020, owner: "David Brown", licensePlateNo: "BTD-523", chassisNumber: "1HGCM82633A123456", fuel: "Petrol",engine:'1900',status:"Active" },
-    { id: 10, make: "Toyota Yaris", type: "Sedan", color: "Silver", year: 2021, owner: "Mark Kim", licensePlateNo: "BAF-734", chassisNumber: "MA3EYD32S007004AN", fuel: "Petrol" ,engine:'1900',status:"Active"},
-    { id: 11, make: "Toyota Corolla", type: "Sedan", color: "Black", year: 2022, owner: "Joshua", licensePlateNo: "BYT-009", chassisNumber: "1HGCM82633A123456", fuel: "Petrol" ,engine:'1900',status:"Active"},
-    { id: 12, make: "Suzuki Alto", type: "Hatchback", color: "Blue", year: 2019, owner: "Anderson", licensePlateNo: "BAF-999", chassisNumber: "MA3EYD32S007004AN", fuel: "Petrol" ,engine:'1900',status:"Active"},
-    { id: 13, make: "Honda City", type: "Sedan", color: "Grey", year: 2018, owner: "Andrew John", licensePlateNo: "BGF-948", chassisNumber: "1HGCM82633A123456", fuel: "Petrol",engine:'1900',status:"Active" },
-    { id: 14, make: "Toyota Corolla", type: "Sedan", color: "Brown", year: 2023, owner: "Mark Miller", licensePlateNo: "BAS-999", chassisNumber: "MA3EYD32S007004AN", fuel: "Petrol",engine:'1900',status:"Active" }
+  // Fetch data on component mount
+  useEffect(() => {
+    axios.get('http://localhost:4000/api/viaRide/vehicle-get-values') // Replace with your actual API URL
+      .then((response) => {
+        setDrivers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching vehicles data:", error);
+      });
+  }, []);
 
-]);
-
-
-
-  
-  
-  // Close popup
+  // Close popups
   const closePopup = () => {
     setPopupOpen(false);
     setEditMode(false);
@@ -63,33 +54,42 @@ const VehicleScreen= () => {
   // Handle delete button click
   const handleDeleteClick = (driver) => {
     setSelectedDriver(driver);
-    setDeletePopupOpen(true); // Open the delete confirmation popup
+    setDeletePopupOpen(true);
   };
 
-  // Confirm delete
   const confirmDelete = () => {
-    setDrivers((prev) => prev.filter((p) => p.id !== selectedDriver.id));
-    closePopup(); // Close all popups
+    axios.delete(`http://localhost:4000/api/viaRide/vehicle-delete-values/${selectedDriver._id}`)
+      .then(() => {
+        // Refetch data after successful delete
+        axios.get('http://localhost:4000/api/viaRide/vehicle-get-values')
+          .then((response) => {
+            setDrivers(response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching vehicles data:", error);
+          });
+        closePopup();
+      })
+      .catch((error) => {
+        console.error("Error deleting vehicle:", error);
+      });
   };
+  
 
+  // Handle edit profile
   const handleEditProfile = () => {
-    // Create a hidden file input for selecting the new profile image
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*";
 
-    // Handle file selection
     fileInput.onchange = (event) => {
       const file = event.target.files[0];
-
       if (file) {
-        // Validate file size (e.g., max 2MB)
         if (file.size > 2 * 1024 * 1024) {
           alert("File size should not exceed 2MB.");
           return;
         }
 
-        // Simulate previewing the uploaded image (as we are frontend only)
         const reader = new FileReader();
         reader.onload = () => {
           setSelectedDriver((prev) => ({
@@ -97,13 +97,10 @@ const VehicleScreen= () => {
             profilePicture: reader.result, // Preview image as base64
           }));
         };
-
-        // Read the file as Data URL (base64)
         reader.readAsDataURL(file);
       }
     };
 
-    // Trigger file input click
     fileInput.click();
   };
 
@@ -124,19 +121,34 @@ const VehicleScreen= () => {
 
   const openEditMode = () => {
     setEditMode(true);
-    setEditedDriver({ ...selectedDriver }); // Create a copy to edit
+    setEditedDriver({ ...selectedDriver });
   };
 
   const handleSaveChanges = () => {
-    // Assuming Driver is the state array of all Drivers
-    setDrivers((prevState) =>
-      prevState.map((driver) =>
-        driver.id === selectedDriver.id ? selectedDriver : driver
-      )
-    );
-    closePopup(); // Close the popup after saving changes
+    // Ensure you're sending the correct driver ID (_id)
+    if (selectedDriver._id) {
+      axios.put(`http://localhost:4000/api/viaRide/vehicle-put-values/${selectedDriver._id}`, editedDriver)
+        .then(() => {
+          // Refetch data after successful update
+          axios.get('http://localhost:4000/api/viaRide/vehicle-get-values')
+            .then((response) => {
+              setDrivers(response.data);
+            })
+            .catch((error) => {
+              console.error("Error fetching vehicles data:", error);
+            });
+          closePopup();
+        })
+        .catch((error) => {
+          console.error("Error updating vehicle:", error);
+        });
+    } else {
+      console.error("Driver ID is missing.");
+    }
   };
-
+  
+  
+  // Handle input change for edit form
   const handleInputChange = (field, value) => {
     setSelectedDriver({
       ...selectedDriver,
@@ -147,6 +159,7 @@ const VehicleScreen= () => {
   const toggleCalendar = () => {
     setCalendarOpen(!calendarOpen);
   };
+
   const resetFilters = () => {
     setSearchTerm("");
     setStatusFilter("");
@@ -155,46 +168,21 @@ const VehicleScreen= () => {
   };
 
   const filteredDrivers = drivers.filter((driver) => {
-    // Check if the driver's name matches the search term
     const matchesSearch = driver.owner
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-  
-    // Check if the driver's status matches the selected status filter
-    const matchesStatus = statusFilter
-      ? driver.status === statusFilter
-      : true;
-  
-    // Date filtering logic for inclusive range
-    const driverDate = new Date(driver.joiningDate);
+
+    const matchesStatus = statusFilter ? driver.status === statusFilter : true;
     const [startDate, endDate] = selectedDateRange;
-  
-    // Normalize both start and end dates to midnight to ensure correct comparison
-    const normalizeDate = (joiningDate) => {
-      if (!joiningDate) return null;
-      const normalizedDate = new Date(joiningDate);
-      normalizedDate.setHours(0, 0, 0, 0); // Set to midnight
-      return normalizedDate;
-    };
-  
-    const normalizedStartDate = normalizeDate(startDate);
-    const normalizedEndDate = normalizeDate(endDate);
-  
+
     const matchesDateRange =
-      (normalizedStartDate ? driverDate >= normalizedStartDate : true) &&
-      (normalizedEndDate ? driverDate <= normalizedEndDate : true);
-  
-    // Rating filtering logic
-    const matchesRatingRange = (() => {
-      if (!ratingFilter) return true; // If no rating filter is selected, match all
-      const [minRating, maxRating] = ratingFilter.split("-").map(Number); // Parse range
-      return driver.rating >= minRating && driver.rating <= maxRating;
-    })();
-  
-    // Combine all filters
+      (startDate ? new Date(driver.joiningDate) >= new Date(startDate) : true) &&
+      (endDate ? new Date(driver.joiningDate) <= new Date(endDate) : true);
+
+    const matchesRatingRange = !ratingFilter || (driver.rating >= ratingFilter.split("-")[0] && driver.rating <= ratingFilter.split("-")[1]);
+
     return matchesSearch && matchesStatus && matchesDateRange && matchesRatingRange;
   });
-  
 
   const displayedDrivers = filteredDrivers.slice(
     (currentPage - 1) * entriesPerPage,
@@ -208,7 +196,6 @@ const VehicleScreen= () => {
   return (
     <div className="user-management">
       <h2 className="page-title">Vehicles</h2>
-
       <div className="filters">
         <div className="left">
           <div className="dispatcher-input-container">
@@ -221,7 +208,6 @@ const VehicleScreen= () => {
             />
             <FaSearch className="input-icon" />
           </div>
-
           <div className="dispatcher-select-container">
             <select
               className="left-select"
@@ -238,21 +224,18 @@ const VehicleScreen= () => {
             <DatePicker
               className="left-date"
               selected={selectedDateRange[0]}
-              onChange={(dates) => setSelectedDateRange(dates)} // Select both start and end date
+              onChange={(dates) => setSelectedDateRange(dates)}
               startDate={selectedDateRange[0]}
               endDate={selectedDateRange[1]}
               selectsRange
               dateFormat="yyyy-MM-dd"
               placeholderText="Bookings details"
-              open={calendarOpen} // Bind open state to DatePicker
-              onClickOutside={() => setCalendarOpen(false)} // Close calendar on outside click
+              open={calendarOpen}
+              onClickOutside={() => setCalendarOpen(false)}
             />
-            <FaCalendarAlt className="date-icon" onClick={toggleCalendar} />{" "}
-            {/* Icon triggers calendar */}
+            <FaCalendarAlt className="date-icon" onClick={toggleCalendar} />
           </div>
-        
         </div>
-
         <div className="right">
           <button className="reset-btn" onClick={resetFilters}>
             Reset Filters
@@ -265,14 +248,13 @@ const VehicleScreen= () => {
           <thead>
             <tr>
               <th>Sr.</th>
-              <th>Make</th>
+              <th>Vehicle Name</th>
               <th>Type</th>
-              <th>Colour</th>
+              <th>Color</th>
               <th>Year</th>
               <th>Owner</th>
               <th>License PLate no</th>
-              <th>Chassis no</th>
-              <th>Feul</th>
+              <th>Fuel</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -281,22 +263,17 @@ const VehicleScreen= () => {
               <tr key={driver.id}>
                 <td>{(currentPage - 1) * entriesPerPage + index + 1}</td>
                 <td>{driver.make}</td>
-                <td>{driver.type}</td>
+                <td>{driver.carType}</td>
                 <td>{driver.color}</td>
                 <td>{driver.year}</td>
                 <td>{driver.owner}</td>
                 <td>{driver.licensePlateNo}</td>
-                <td>{driver.chassisNumber}</td>
-                <td>{driver.fuel}</td>
-
+                <td>{driver.feul}</td>
                 <td>
-                  <button className="popupedit-btn">
-                    <FaPencilAlt onClick={() => openViewPopup(driver)} />
+                  <button className="popupedit-btn" onClick={() => openViewPopup(driver)}>
+                    <FaPencilAlt />
                   </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDeleteClick(driver)}
-                  >
+                  <button className="delete-btn" onClick={() => handleDeleteClick(driver)}>
                     <FaTrash />
                   </button>
                 </td>
@@ -320,9 +297,7 @@ const VehicleScreen= () => {
             {Array.from({ length: totalPages }, (_, index) => (
               <span
                 key={index}
-                className={`pagination-link ${
-                  currentPage === index + 1 ? "active" : ""
-                }`}
+                className={`pagination-link ${currentPage === index + 1 ? "active" : ""}`}
                 onClick={() => handlePageChange(index + 1)}
               >
                 {index + 1}
@@ -331,203 +306,159 @@ const VehicleScreen= () => {
             <span
               className="pagination-text"
               onClick={() => handlePageChange(currentPage + 1)}
-              style={{
-                cursor: currentPage < totalPages ? "pointer" : "not-allowed",
-              }}
+              style={{ cursor: currentPage < totalPages ? "pointer" : "not-allowed" }}
             >
               Next
             </span>
           </div>
         </div>
+      </div>
+      {popupOpen && (
+  <div className="popup-overlay">
+    {editMode ? (
+      <div className="edit-popup">
+        <div className="edit-header">
+          <h3>Vehicle Details</h3>
+          <button className="close-btn" onClick={closePopup}>
+            <IoCloseSharp />
+          </button>
+        </div>
+        <div className="profile-section">
+          <img
+            src={selectedDriver.profile || Car} // Use imported image directly here
+            alt="Vehicle"
+            className="viewCar-image"
+          />
+          <button className="edit-icon-btn" onClick={handleEditProfile}>
+            <FaEdit className="edit-icon" />
+          </button>
+        </div>
 
-        {/* Popup */}
-        {popupOpen && (
-          <div className="popup-overlay">
-            {editMode ? (
-              <div className="edit-popup">
-                <div className="edit-header">
-                  <h3>Vehicle Details</h3>
-                  <button className="close-btn" onClick={closePopup}>
-                    <IoCloseSharp />
-                  </button>
-                </div>
-                <div className="profile-section">
-                <img
-                        src={selectedDriver.profile || Car} // Use imported image directly here
-                        alt="Driver Profile"
-                        className="viewCar-image"
-                      />
-                  <button className="edit-icon-btn" onClick={handleEditProfile}>
-                    <FaEdit className="edit-icon" />
-                  </button>
-                </div>
+        <div className="basic-details">
+        <div className="field-row">
+  <div className="popup-field">
+    <label>Vehicle Name:</label>
+    <input
+      type="text"
+      value={editedDriver?.make || selectedDriver?.make}
+      onChange={(e) => setEditedDriver({ ...editedDriver, make: e.target.value })}
+    />
+  </div>
+  <div className="popup-field">
+    <label>Color:</label>
+    <input
+      type="text"
+      value={editedDriver?.color || selectedDriver?.color}
+      onChange={(e) => setEditedDriver({ ...editedDriver, color: e.target.value })}
+    />
+  </div>
+</div>
 
-                <div className="basic-details">
-                  <div className="field-row">
-                    <div className="popup-field">
-                      <label>Make:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.make}
-                        onChange={(e) =>
-                          handleInputChange("make", e.target.make)
-                        }
-                      />
-                    </div>
-                    <div className="popup-field">
-                      <label>Colour:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.name}
-                        onChange={(e) =>
-                          handleInputChange("color", e.target.color)
-                        }
-                      />
-                    </div>
-                  </div>
-                  <div className="field-row">
-                    <div className="popup-field">
-                      <label>Type:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.gender}
-                        onChange={(e) =>
-                          handleInputChange("type", e.target.type)
-                        }
-                      />
-                    </div>
-                    <div className="popup-field">
-                      <label>License plate no:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.age}
-                        onChange={(e) =>
-                          handleInputChange("licensePlateNo", e.target.licensePlateNo)
-                        }
-                      />
-                    </div>
-                  </div>
+<div className="field-row">
+  <div className="popup-field">
+    <label>Type:</label>
+    <input
+      type="text"
+      value={editedDriver?.carType || selectedDriver?.carType}
+      onChange={(e) => setEditedDriver({ ...editedDriver, carType: e.target.value })}
+    />
+  </div>
+  <div className="popup-field">
+    <label>License Plate No:</label>
+    <input
+      type="text"
+      value={editedDriver?.licensePlateNo || selectedDriver?.licensePlateNo}
+      onChange={(e) =>
+        setEditedDriver({ ...editedDriver, licensePlateNo: e.target.value })
+      }
+    />
+  </div>
+</div>
 
-                  <div className="field-row">
-                  <div className="popup-field">
-                      <label>Year:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.wallet}
-                        onChange={(e) =>
-                          handleInputChange("year", e.target.year)
-                        }
-                      />
-                    </div>
-                    <div className="popup-field">
-                      <label>Chassis no:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.cnic}
-                        onChange={(e) =>
-                          handleInputChange("chassisNo", e.target.chassisNumber)
-                        }
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="field-row">
-                   
-                    <div className="popup-field">
-                      <label>Feul type:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.contact}
-                        onChange={(e) =>
-                          handleInputChange("feul", e.target.fuel)
-                        }
-                      />
-                    </div>
-                    <div className="popup-field">
-                      <label>Engine:</label>
-                      <input
-                        type="text"
-                        value={selectedDriver.contact}
-                        onChange={(e) =>
-                          handleInputChange("engine", e.target.engine)
-                        }
-                      />
-                    </div>
-                  </div>
-                
-                </div>
-               
-                <div className="popup-footer">
-                  <button onClick={handleSaveChanges} className="edit-btn">
-                    Update
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="details-popup">
-                <div className="detail-header">
-                  <p className="status">
-                    <p>Status: {selectedDriver.status}</p>
-                  </p>
-                  <button className="close-btn" onClick={closePopup}>
-                    <IoCloseSharp />
-                  </button>
-                </div>
-                <div className="basic-details">
-                  <h3>Vehicle Details</h3>
-                  <div className="profileimage-entry">
-                      <img
-                        src={selectedDriver.profile || Car} // Use imported image directly here
-                        alt="Driver Profile"
-                        className="viewCar-image"
-                      />
-                      <p>{selectedDriver.make}</p>
-                    </div>
-                  <div className="make-box">
-                  <div className="popup-lable">
-                    </div>
-                    <div className="popup-entries">
-                    <p> {selectedDriver.name}</p>
-                    </div>
-                  </div>
-                  
-                 
-                  <div className="popup-box">
-                    <div className="popup-lable">
-                      <p>Type:</p>
-                      <p>Colour:</p>
-                      <p>Year:</p>
-                      <p>Owner: </p>
-                      <p>license plate no: </p>
-                      <p>chassis no: </p>
-                      <p>Feul: </p>
-                      <p>Status: </p>
-                      <p>Engine: </p>
-                    </div>
-                    <div className="popup-entries">
-                      <p>{selectedDriver.type}</p>
-                      <p>{selectedDriver.color}</p>
-                      <p>{selectedDriver.year}</p>
-                      <p>{selectedDriver.owner}</p>
-                      <p>{selectedDriver.licensePlateNo}  </p>
-                      <p>{selectedDriver.chassisNumber} </p>
-                      <p>{selectedDriver.fuel} </p>
-                      <p>{selectedDriver.status} </p>
-                      <p>{selectedDriver.engine} </p>
-                    </div>
-                  </div>
-                </div>
-             
-                <div className="popup-footer">
-                  <button onClick={openEditMode} className="edit-btn">
-                    Edit
-                  </button>
-                </div>
-              </div>
-            )}
+<div className="field-row">
+  <div className="popup-field">
+    <label>Year:</label>
+    <input
+      type="text"
+      value={editedDriver?.year || selectedDriver?.year}
+      onChange={(e) => setEditedDriver({ ...editedDriver, year: e.target.value })}
+    />
+  </div>
+  <div className="popup-field">
+    <label>Fuel Type:</label>
+    <input
+      type="text"
+      value={editedDriver?.feul || selectedDriver?.feul}
+      onChange={(e) => setEditedDriver({ ...editedDriver, feul: e.target.value })}
+    />
+  </div>
+</div>
+
+
+         
+        </div>
+
+        <div className="popup-footer">
+          <button onClick={handleSaveChanges} className="edit-btn">
+            Update
+          </button>
+        </div>
+      </div>
+    ) : (
+      <div className="details-popup">
+        <div className="detail-header">
+          <p className="status">
+            <p>Status: {selectedDriver.status}</p>
+          </p>
+          <button className="close-btn" onClick={closePopup}>
+            <IoCloseSharp />
+          </button>
+        </div>
+
+        <div className="basic-details">
+          <h3>Vehicle Details</h3>
+          <div className="profileimage-entry">
+            <img
+              src={selectedDriver.profile || Car} // Use imported image directly here
+              alt="Vehicle Profile"
+              className="viewCar-image"
+            />
+            <p>{selectedDriver.make}</p>
           </div>
-        )}
-        {deletePopupOpen && (
+          <div className="popup-box">
+            <div className="popup-lable">
+              <p>Type:</p>
+              <p>Color:</p>
+              <p>Year:</p>
+              <p>Owner:</p>
+              <p>License Plate No:</p>
+              <p>Fuel:</p>
+              <p>Status:</p>
+            </div>
+            <div className="popup-entries">
+              <p>{selectedDriver.carType}</p>
+              <p>{selectedDriver.color}</p>
+              <p>{selectedDriver.year}</p>
+              <p>{selectedDriver.owner}</p>
+              <p>{selectedDriver.licensePlateNo}</p>
+              <p>{selectedDriver.feul}</p>
+              <p>{selectedDriver.status}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="popup-footer">
+          <button onClick={openEditMode} className="edit-btn">
+            Edit
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
+      
+{deletePopupOpen && (
           <div className="popup-overlay">
             <div className="delete-popup">
               <div className="delete-header">
@@ -559,7 +490,7 @@ const VehicleScreen= () => {
             </div>
           </div>
         )}
-      </div>
+
     </div>
   );
 };

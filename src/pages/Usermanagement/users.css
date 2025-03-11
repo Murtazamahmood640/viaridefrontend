@@ -244,7 +244,9 @@
 .edit-btn {
   color: #007bff;
 }
- 
+.popup-title{
+  margin: 15px 0;
+}
 .delete-btn {
   color: #dc3545;
 }
@@ -508,7 +510,6 @@ align-items: center;
 .profileimage-entry{
 width: 70%;
 display: flex;
-align-items: center;
 }
 
 .profileimage-entry img {
@@ -549,7 +550,7 @@ display: flex;
 justify-content: space-between; /* Distribute items across the row */
 align-items: flex-start; /* Align items at the top */
 width: 100%;
-margin-bottom: 25px; /* Add some spacing between rows */
+margin-bottom: 20px; /* Add some spacing between rows */
 }
  
 .popup-label p {
@@ -570,14 +571,14 @@ color: #000; /* Make JSON file content black */
 .popup-separator {
 border: none;
 border-top: 1px solid #ddd; /* Light gray separator */
-margin: 20px 0; /* Add spacing around the separator */
+margin: 10px 0; /* Add spacing around the separator */
 }
  
 .popup-subtitle {
 font-size: 16px;
 font-weight: bold;
 color: #333; /* Darker color for emphasis */
-margin-bottom: 15px; /* Space below the heading */
+margin: 12px 0;
 }
  
 .popup-documents-popup {
@@ -611,8 +612,8 @@ color: #333;
 display: flex;
 justify-content: center; /* Center buttons horizontally */
 gap: 10px; /* Add spacing between buttons */
-margin-top: 20px; /* Space above the buttons */
-margin-bottom : 20px
+margin-top: 10px; /* Space above the buttons */
+margin-bottom : 10px
 }
  
  
@@ -1165,7 +1166,7 @@ background: none;
 border: none;
 cursor: pointer;
 position: absolute;
-top: 40px;
+top: 30px;
 left: 54%;
 }
  
