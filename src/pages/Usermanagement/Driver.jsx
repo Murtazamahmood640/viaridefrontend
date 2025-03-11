@@ -33,7 +33,7 @@ const Driver = () => {
   const [ratingFilter, setRatingFilter] = useState("");
   const [drivers, setDrivers] = useState([]);
  
-  const API_URL = "http://localhost:4000/api/ViaRide/chalany-wala";
+  const API_URL = "http://localhost:4000/api/ViaRide/allDriver";
   // Close popup
   const closePopup = () => {
     setPopupOpen(false);
@@ -394,7 +394,7 @@ const Driver = () => {
                       <label>Name:</label>
                       <input
                         type="text"
-                        value={selectedDriver.name}
+                        value={selectedDriver.driverName}
                         onChange={(e) =>
                           handleInputChange("driverName", e.target.value)
                         }

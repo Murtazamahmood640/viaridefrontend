@@ -41,7 +41,7 @@ const OTP = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/ViaRide/verify-otp",
+        "https://viaridebackend.vercel.app/api/ViaRide/verify-otp",
         {
           email,
           otp: enteredOtp,
@@ -66,7 +66,7 @@ const OTP = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/ViaRide/resend-otp",
+        "https://viaridebackend.vercel.app/api/ViaRide/resend-otp",
         {
           email,
         }
@@ -74,6 +74,8 @@ const OTP = () => {
 
       if (response.status === 200) {
         alert("New OTP sent to your email!");
+        alert("New OTP sent to your email!");
+        setOtp(new Array(6).fill("")); // Clear the OTP input fields
       }
     } catch (error) {
       alert("Error resending OTP. Please try again.");

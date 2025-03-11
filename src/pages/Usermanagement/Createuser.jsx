@@ -273,7 +273,7 @@ const UserManagement = () => {
       <div className="form-container">
         <h2>Create User</h2>
 
-        <form onSubmit={handleSubmit} className="user-formDesign">
+        <form onSubmit={handleSubmit} className="user-formDesign" autoComplete="off">
           <div className="form-field">
             <label htmlFor="name">Full Name</label>
 
@@ -298,6 +298,8 @@ const UserManagement = () => {
               placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
+              autoComplete="off"
+              inputMode="none"
               required
             />
           </div>

@@ -7,15 +7,15 @@ const TopBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [notifications, setNotifications] = useState(3); // Set the number of notifications (default is 3)
   const [messages, setMessages] = useState(5); // Set the number of messages (default is 5)
-  const [role, setRole] = useState(''); // State to store user role
+  const [name, setName] = useState(''); // State to store user role
 
   useEffect(() => {
     // Retrieve the user role from localStorage
-    const role = localStorage.getItem('Role');
-    if (role) {
-      setRole(role); // Set the role to state if found
+    const name = localStorage.getItem('name');
+    if (name) {
+      setName(name); // Set the role to state if found
     } else {
-      setRole('User'); // Default role if not found
+      setName('User'); // Default role if not found
     }
   }, []);
 
@@ -39,7 +39,7 @@ const TopBar = () => {
   return (
     <div className="top-bar">
       {/* Display dynamic user role instead of static "Admin" */}
-      <Link to="/" className="logo">Welcome Back {role}</Link>
+      <Link to="/" className="logo">Welcome {name}</Link>
 
       {/* Search Bar with Icon inside */}
       <form onSubmit={handleSearchSubmit} className="search-form">
