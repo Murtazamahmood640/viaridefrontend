@@ -50,7 +50,7 @@ const UserManagement = () => {
   useEffect(() => {
     axios
 
-      .get("https://viaridebackend.vercel.app/api/viaRide/createuser")
+      .get("http://localhost:4000/api/viaRide/createuser")
 
       .then((response) => {
         setUsers(response.data);
@@ -73,33 +73,44 @@ const UserManagement = () => {
     }
   };
 
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    
+    return password.length >= minLength && hasUppercase && hasNumber && hasSpecialChar;
+  };
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
+    // Password validation
+    if (!validatePassword(formData.password)) {
+      alert("Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character.");
+      return;
+    }
+  
     if (formData.name && formData.role && formData.email && formData.password) {
       const newUser = {
         ...formData,
-
         createdDate: new Date().toISOString().split("T")[0],
       };
-
+  
       axios
-
-        .post("https://viaridebackend.vercel.app/api/viaRide/createuser", newUser)
-
+        .post("http://localhost:4000/api/viaRide/createuser", newUser)
         .then((response) => {
           setUsers([...users, response.data]);
-
           setFormData({ name: "", email: "", password: "", role: "" });
-
-          window.location.reload(); // Refresh page after creating user
+          window.location.reload();
         })
-
         .catch((error) => {
           console.error("Error creating user:", error);
         });
     }
   };
+  
 
   const handleDelete = (id) => {
     setUsers(users.filter((user) => user._id !== id)); // Remove the user by id
@@ -136,7 +147,7 @@ const UserManagement = () => {
       axios
 
         .delete(
-          `https://viaridebackend.vercel.app/api/viaRide/createuser/${userToDelete._id}`
+          `http://localhost:4000/api/viaRide/createuser/${userToDelete._id}`
         )
 
         .then((response) => {
@@ -204,7 +215,7 @@ const UserManagement = () => {
       axios
 
         .put(
-          `https://viaridebackend.vercel.app/api/viaRide/createuser/${selectedUser._id}`,
+          `http://localhost:4000/api/viaRide/createuser/${selectedUser._id}`,
 
           updatedUser
         )
@@ -305,25 +316,30 @@ const UserManagement = () => {
           </div>
 
           <div className="form-field password-field">
-            <label htmlFor="password">Password</label>
+  <label htmlFor="password">Password</label>
+  <input
+    id="password"
+    type={showPassword ? "text" : "password"}
+    name="password"
+    placeholder="Password"
+    autoComplete="new-password" // This specifically prevents autofill for password fields
+    value={formData.password}
+    onChange={handleInputChange}
+    required
+  />
+  <span
+    className="password-toggle"
+    onClick={() => setShowPassword(!showPassword)}
+  >
+    {showPassword ? <FaEyeSlash /> : <FaEye />}
+  </span>
+  {!validatePassword(formData.password) && formData.password.length > 0 && (
+    <p className="password-validation-error">
+      Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character.
+    </p>
+  )}
+</div>
 
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-
-            <span
-              className="password-toggle"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          </div>
 
           <div className="form-field">
             <label htmlFor="role">Role</label>
@@ -496,7 +512,7 @@ const UserManagement = () => {
                   Upload New
                 </button>
               </div>
-              <form className="popup-formDesign">
+              <form className="popup-formDesign" autoComplete="off">
                 <div className="form-field">
                   <label htmlFor="editName">Full Name</label>
                   <input
@@ -516,6 +532,7 @@ const UserManagement = () => {
                     type="email"
                     name="email"
                     placeholder="Email"
+                    autoComplete="off"
                     value={editFormData.email}
                     onChange={handleEditFormChange}
                     required

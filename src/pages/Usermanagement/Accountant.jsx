@@ -73,17 +73,20 @@ const Accountant = () => {
     }
   };
  
-  // Update accountant
   const handleSaveChanges = async () => {
-    if (!selectedAccountant) return;
+    if (!editedAccountant) return; // Ensure editedAccountant is not null
+  
     try {
-      const response = await axios.put(`${API_URL}/${selectedAccountant._id}`, selectedAccountant);
-      setAccountants(accountants.map((d) => (d._id === selectedAccountant._id ? response.data : d)));
+      const response = await axios.put(`${API_URL}/${editedAccountant._id}`, editedAccountant);
+      setAccountants(accountants.map((acc) =>
+        acc._id === editedAccountant._id ? response.data : acc
+      ));
       closePopup();
     } catch (error) {
       console.error("Error updating accountant:", error);
     }
   };
+  
  
   const handleEditProfile = () => {
     // Create a hidden file input for selecting the new profile image
