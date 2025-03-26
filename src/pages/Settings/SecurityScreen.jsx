@@ -2,34 +2,76 @@ import React, { useState, useRef } from "react";
 import "./SecurityScreen.css";
 import {Link} from 'react-router-dom';
 import { FaLanguage, FaPaintBrush, FaShieldAlt } from "react-icons/fa"; // Importing icons
+import axios from "axios";
+
 
 const SecurityScreen = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]); // State for OTP inputs
   const inputs = useRef([]); // References for each OTP input
+  const [email, setEmail] = useState("");
 
-  const handleLogoutClick = () => {
-    setIsLogoutModalOpen(true); // Open the logout confirmation modal
-  };
+React.useEffect(() => {
+  const storedEmail = localStorage.getItem("email");
+  if (storedEmail) setEmail(storedEmail);
+}, []);
 
-  const handleConfirmLogout = () => {
-    setIsLogoutModalOpen(false); // Close the logout confirmation modal
-    setIsVerifyModalOpen(true); // Open the verification modal
+
+const handleLogoutClick = async () => {
+  try {
+    await axios.post("http://localhost:4000/api/viaRide/info", {
+      level: "INFO",
+      message: `Logout confirmation modal opened by ${email}.`,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    await axios.post("http://localhost:4000/api/viaRide/error", {
+      level: "ERROR",
+      message: `Error logging logout modal open action by ${email}: ${
+        error.response?.data?.message || error.message
+      }`,
+      timestamp: new Date().toISOString(),
+    });
+  } finally {
+    setIsLogoutModalOpen(true); 
+  }
+};
+
+
+  const handleConfirmLogout = async () => {
+    try {
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Global logout initiated by ${email}. All users will be required to re-login.`,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Failed to log global logout action by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
+    } finally {
+      setIsLogoutModalOpen(false);
+      setIsVerifyModalOpen(true);
+    }
   };
+  
 
   const handleCloseModals = () => {
     setIsLogoutModalOpen(false);
-    setIsVerifyModalOpen(false); // Close all modals
+    setIsVerifyModalOpen(false);
   };
 
   const handleOtpChange = (value, index) => {
-    if (!/^\d?$/.test(value)) return; // Allow only numeric values
+    if (!/^\d?$/.test(value)) return; 
     const updatedOtp = [...otp];
     updatedOtp[index] = value;
     setOtp(updatedOtp);
 
-    // Automatically move focus to the next input
     if (value && index < otp.length - 1) {
       inputs.current[index + 1].focus();
     }
@@ -38,10 +80,9 @@ const SecurityScreen = () => {
   const handleOtpKeyDown = (e, index) => {
     if (e.key === "Backspace") {
       const updatedOtp = [...otp];
-      updatedOtp[index] = ""; // Clear the current input
+      updatedOtp[index] = ""; 
       setOtp(updatedOtp);
 
-      // Move focus to the previous input on backspace
       if (index > 0) {
         inputs.current[index - 1].focus();
       }
@@ -82,7 +123,7 @@ const SecurityScreen = () => {
           <div className="security-toggle-switch">
             <input type="checkbox" id="toggleTwoStep" />
             <label htmlFor="toggleTwoStep"></label>
-          </div>
+          </div> 
         </div>
 
         <div className="security-setting-item">

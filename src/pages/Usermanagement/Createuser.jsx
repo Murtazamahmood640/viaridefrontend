@@ -24,8 +24,9 @@ const UserManagement = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
+  
   const [searchTerm, setSearchTerm] = useState("");
-  const [roleFilter, setRoleFilter] = useState(""); // Added state for role filtering
+  const [roleFilter, setRoleFilter] = useState(""); 
   const [showPassword, setShowPassword] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [imageFile, setImageFile] = useState(null);
@@ -34,6 +35,7 @@ const UserManagement = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [email, setEmail] = useState("");
   const [editFormData, setEditFormData] = useState({
     name: "",
     email: "",
@@ -43,20 +45,17 @@ const UserManagement = () => {
 
   const [editShowPassword, setEditShowPassword] = useState(false);
 
-  const entriesPerPage = 5; // Set the number of entries per page
-
-  // Fetch users from the backend API
+  const entriesPerPage = 5; 
 
   useEffect(() => {
-    axios
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) {
+      setEmail(storedEmail);
+    } else {
+      alert("No email found! Redirecting...");
+    }
 
-      .get("http://localhost:4000/api/viaRide/createuser")
-
-      .then((response) => {
-        setUsers(response.data);
-      })
-
-      .catch((error) => {
+    axios.get("http://localhost:4000/api/viaRide/createuser").then((response) => {setUsers(response.data);}).catch((error) => {
         console.error("Error fetching users:", error);
       });
   }, []);
@@ -83,12 +82,14 @@ const UserManagement = () => {
   };
   
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     // Password validation
     if (!validatePassword(formData.password)) {
-      alert("Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character.");
+      alert(
+        "Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character."
+      );
       return;
     }
   
@@ -98,18 +99,151 @@ const UserManagement = () => {
         createdDate: new Date().toISOString().split("T")[0],
       };
   
-      axios
-        .post("http://localhost:4000/api/viaRide/createuser", newUser)
-        .then((response) => {
-          setUsers([...users, response.data]);
-          setFormData({ name: "", email: "", password: "", role: "" });
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error("Error creating user:", error);
+      try {
+        const response = await axios.post(
+          "http://localhost:4000/api/viaRide/createuser",
+          newUser
+        );
+  
+        // If user creation is successful, log INFO
+        if (response.status === 200) {
+          await axios.post("http://localhost:4000/api/viaRide/info", {
+            level: "INFO",
+            message: `User ${formData.email} created successfully for ${email}.`,
+            timestamp: new Date().toISOString(),
+          });
+          localStorage.setItem("email", email);
+        }
+  
+        setUsers([...users, response.data]);
+        setFormData({ name: "", email: "", password: "", role: "" });
+        window.location.reload();
+      } catch (error) {
+        console.error("Error creating user:", error);
+  
+        // Log ERROR
+        await axios.post("http://localhost:4000/api/viaRide/error", {
+          level: "ERROR",
+          message: `User creation failed for ${formData.email}: ${
+            error.response?.data?.message || error.message
+          }`,
+          timestamp: new Date().toISOString(),
         });
+      }
     }
   };
+  
+
+  const handleUpdateUser = async () => {
+    if (
+      editFormData.name &&
+      editFormData.email &&
+      editFormData.password &&
+      editFormData.role &&
+      selectedUser
+    ) {
+      const updatedUser = {
+        ...editFormData,
+      };
+
+      try {
+        const response = await axios.put(`http://localhost:4000/api/viaRide/createuser/${selectedUser._id}`,updatedUser)
+        if (response.status === 200) {
+          await axios.post("http://localhost:4000/api/viaRide/info", {
+            level: "INFO",
+            message: `User${formData.email} updated successfully for ${email}.`,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        const updatedUsers = users.map((user) =>
+          user._id === selectedUser._id ? response.data : user
+        );
+
+        setUsers(updatedUsers);
+          setShowSuccessMessage(true);
+          setTimeout(() => {
+            setShowSuccessMessage(false);
+          }, 3000);
+          setShowEditModal(false);
+          setShowModal(false);
+          setSelectedUser(null);
+          window.location.reload();
+
+      } catch(error) {
+        console.error("Error updating user:", error);
+        await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `User update failed for ${formData.email}: ${
+          error.response?.data?.message || error.message
+            }`,
+            timestamp: new Date().toISOString(),
+          });
+        }
+    }
+  };
+
+
+  const handleDeleteConfirm = async () => {
+    if (userToDelete) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:4000/api/viaRide/createuser/${userToDelete._id}`
+        );
+  
+        if (response.status === 200) {
+          // Log successful deletion
+          await axios.post("http://localhost:4000/api/viaRide/info", {
+            level: "INFO",
+            message: `User ${userToDelete.email} deleted successfully for ${email}.`,
+            timestamp: new Date().toISOString(),
+          });
+  
+          setUsers(users.filter((user) => user._id !== userToDelete._id));
+          setShowDeleteModal(false);
+          setUserToDelete(null);
+          window.location.reload(); // Refresh page after deleting user
+        }
+      } catch (error) {
+        console.error("Error deleting user:", error);
+  
+        // Log error during deletion
+        await axios.post("http://localhost:4000/api/viaRide/error", {
+          level: "ERROR",
+          message: `Failed to delete user ${userToDelete.email}: ${
+            error.response?.data?.message || error.message
+          }`,
+          timestamp: new Date().toISOString(),
+        });
+      }
+    }
+  };
+  
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+
+    setUserToDelete(null);
+  };
+
+  const handleEditModalOpen = () => {
+    if (selectedUser) {
+      setEditFormData({
+        name: selectedUser.name,
+
+        email: selectedUser.email,
+
+        password: selectedUser.password,
+
+        role: selectedUser.role,
+      });
+
+      setEditShowPassword(false);
+
+      setShowEditModal(true);
+    }
+  };
+
   
 
   const handleDelete = (id) => {
@@ -142,56 +276,7 @@ const UserManagement = () => {
     setShowDeleteModal(true); // Show the delete confirmation modal
   };
 
-  const handleDeleteConfirm = () => {
-    if (userToDelete) {
-      axios
-
-        .delete(
-          `http://localhost:4000/api/viaRide/createuser/${userToDelete._id}`
-        )
-
-        .then((response) => {
-          if (response.status === 200) {
-            setUsers(users.filter((user) => user._id !== userToDelete._id));
-
-            setShowDeleteModal(false);
-
-            setUserToDelete(null);
-
-            window.location.reload(); // Refresh page after deleting user
-          }
-        })
-
-        .catch((error) => {
-          console.error("Error deleting user:", error);
-        });
-    }
-  };
-
-  const handleDeleteCancel = () => {
-    setShowDeleteModal(false);
-
-    setUserToDelete(null);
-  };
-
-  const handleEditModalOpen = () => {
-    if (selectedUser) {
-      setEditFormData({
-        name: selectedUser.name,
-
-        email: selectedUser.email,
-
-        password: selectedUser.password,
-
-        role: selectedUser.role,
-      });
-
-      setEditShowPassword(false);
-
-      setShowEditModal(true);
-    }
-  };
-
+  
   const handleEditModalClose = () => {
     setShowEditModal(false);
   };
@@ -200,53 +285,7 @@ const UserManagement = () => {
     setEditFormData({ ...editFormData, [e.target.name]: e.target.value });
   };
 
-  const handleUpdateUser = () => {
-    if (
-      editFormData.name &&
-      editFormData.email &&
-      editFormData.password &&
-      editFormData.role &&
-      selectedUser
-    ) {
-      const updatedUser = {
-        ...editFormData,
-      };
 
-      axios
-
-        .put(
-          `http://localhost:4000/api/viaRide/createuser/${selectedUser._id}`,
-
-          updatedUser
-        )
-
-        .then((response) => {
-          const updatedUsers = users.map((user) =>
-            user._id === selectedUser._id ? response.data.user : user
-          );
-
-          setUsers(updatedUsers);
-
-          setShowSuccessMessage(true);
-
-          setTimeout(() => {
-            setShowSuccessMessage(false);
-          }, 3000);
-
-          setShowEditModal(false);
-
-          setShowModal(false);
-
-          setSelectedUser(null);
-
-          window.location.reload();
-        })
-
-        .catch((error) => {
-          console.error("Error updating user:", error);
-        });
-    }
-  };
 
   const resetFilters = () => {
     setSearchTerm("");

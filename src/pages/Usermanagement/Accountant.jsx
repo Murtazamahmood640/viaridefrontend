@@ -28,6 +28,8 @@ const Accountant = () => {
   const [selectedAccountant, setSelectedAccountant] = useState(null);
   const [deletePopupOpen, setDeletePopupOpen] = useState(false); // Toggle for delete confirmation popup
   const [accountants, setAccountants] = useState([]);
+  const [email, setEmail] = useState("");
+
 
 
   const API_URL = "https://viaridebackend.vercel.app/api/ViaRide/accountant";
@@ -47,8 +49,11 @@ const Accountant = () => {
  
   // Fetch accountant from backend
   useEffect(() => {
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) setEmail(storedEmail);
     fetchAccountants();
   }, []);
+  
  
   const fetchAccountants = async () => {
     try {
@@ -66,26 +71,67 @@ const Accountant = () => {
     if (!selectedAccountant) return;
     try {
       await axios.delete(`${API_URL}/${selectedAccountant._id}`);
+  
+      // Log INFO
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Accountant ${selectedAccountant.email} deleted successfully by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+  
       setAccountants(accountants.filter((d) => d._id !== selectedAccountant._id));
       closePopup();
     } catch (error) {
       console.error("Error deleting accountant:", error);
+  
+      // Log ERROR
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Failed to delete accountant ${selectedAccountant.email} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
     }
   };
+  
  
   const handleSaveChanges = async () => {
-    if (!editedAccountant) return; // Ensure editedAccountant is not null
+    if (!editedAccountant) return;
   
     try {
-      const response = await axios.put(`${API_URL}/${editedAccountant._id}`, editedAccountant);
-      setAccountants(accountants.map((acc) =>
-        acc._id === editedAccountant._id ? response.data : acc
-      ));
+      const response = await axios.put(
+        `${API_URL}/${editedAccountant._id}`,
+        editedAccountant
+      );
+  
+      // Log INFO
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Accountant ${editedAccountant.email} updated successfully by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+  
+      setAccountants(
+        accountants.map((acc) =>
+          acc._id === editedAccountant._id ? response.data : acc
+        )
+      );
       closePopup();
     } catch (error) {
       console.error("Error updating accountant:", error);
+  
+      // Log ERROR
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Failed to update accountant ${editedAccountant.email} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
     }
   };
+  
   
  
   const handleEditProfile = () => {

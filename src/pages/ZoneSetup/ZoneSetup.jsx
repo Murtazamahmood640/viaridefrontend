@@ -3,6 +3,8 @@ import "../ZoneSetup/ZoneSetup.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FaSearch } from "react-icons/fa";
 import { BsTrash3 } from "react-icons/bs";
+import axios from "axios";
+
 
 const ZoneSetup = () => {
   const [zones, setZones] = useState([
@@ -17,16 +19,46 @@ const ZoneSetup = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [zoneToDelete, setZoneToDelete] = useState(null);
+  const [email, setEmail] = useState("");
+
+  React.useEffect(() => {
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) setEmail(storedEmail);
+  }, []);
 
   const handleDeleteClick = (id) => {
     setZoneToDelete(id);
     setIsModalVisible(true);
   };
 
-  const confirmDelete = () => {
-    setZones(zones.filter((zone) => zone.id !== zoneToDelete));
-    setIsModalVisible(false);
+  const confirmDelete = async () => {
+    try {
+      const deletedZone = zones.find((zone) => zone.id === zoneToDelete);
+  
+      // Simulate deletion
+      setZones(zones.filter((zone) => zone.id !== zoneToDelete));
+      setIsModalVisible(false);
+  
+      // Log success
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Zone "${deletedZone.name}" deleted successfully by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      console.error("Error deleting zone:", error);
+  
+      // Log error
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Failed to delete zone with ID ${zoneToDelete} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
+    }
   };
+  
 
   const filteredZones = zones.filter((zone) =>
     zone.name.toLowerCase().includes(searchTerm.toLowerCase())

@@ -6,6 +6,8 @@ import pickup from '../../../src/Assets/DispatchIcons/uncheck-rb.png'
 import dropoff from '../../../src/Assets/DispatchIcons/loc-pic.png'
 import drivericon from '../../../src/Assets/DispatchIcons/taxidriver.png'
 import GoogleMapReact from 'google-map-react'
+import axios from 'axios'
+
 
 const UpcomingRide = () => {
   const defaultCenter = {
@@ -55,6 +57,13 @@ const UpcomingRide = () => {
   const [selectedRide, setSelectedRide] = useState(null)
   const [isModalVisible, setModalVisible] = useState(false)
   const [selectedDriverId, setSelectedDriverId] = useState('')
+  const [email, setEmail] = useState("");
+
+React.useEffect(() => {
+  const storedEmail = localStorage.getItem("email");
+  if (storedEmail) setEmail(storedEmail);
+}, []);
+
 
   const availableDrivers = [
     {
@@ -92,6 +101,42 @@ const UpcomingRide = () => {
       ride.dropoff.toLowerCase().includes(searchQuery.toLowerCase())
     return matchesStatus && matchesSearch
   })
+
+  const handleDispatchRide = async () => {
+    try {
+      const ride = rides.find(r => r.id === selectedRide);
+      const driver = availableDrivers.find(d => d.id === selectedDriverId);
+  
+      if (!ride || !driver) {
+        alert("Please select a valid ride and driver.");
+        return;
+      }
+  
+      // Log the dispatch action
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Ride ${ride.id} dispatched to driver ${driver.name} (${driver.id}) by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+  
+      // Optionally, you can update ride status or close modal here
+      setModalVisible(false);
+      alert("Ride dispatched and log saved.");
+    } catch (error) {
+      console.error("Error dispatching ride:", error);
+  
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Failed to dispatch ride ${selectedRide} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
+  
+      alert("Dispatch failed. Error logged.");
+    }
+  };
+  
 
   // Function to return the background color for the status
   const getStatusColor = status => {
@@ -353,7 +398,7 @@ const UpcomingRide = () => {
                   </select>
                 </div>
 
-                <button className='up-dispatch-ride-btn'>Dispatch Ride</button>
+                <button className='up-dispatch-ride-btn' onClick={handleDispatchRide}>Dispatch Ride</button>
               </div>
             </div>
           </div>

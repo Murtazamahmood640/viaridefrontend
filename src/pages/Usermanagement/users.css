@@ -22,6 +22,11 @@
   display: flex;
   justify-content: space-between;
 }
+.log-left {
+  width: 70%;
+  display: flex;
+  gap: 5%;
+}
 .incident {
   width: 70%;
   display: flex;
@@ -111,6 +116,7 @@
   border-radius: 20px;
   outline: none;
   color: #000;
+  background-color: transparent;
 }
  
 .popupView-btn {

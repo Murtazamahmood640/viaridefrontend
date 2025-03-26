@@ -30,6 +30,8 @@ const Dispatcher = () => {
   const [editedDispatcher, setEditedDispatcher] = useState(null);
   const [selectedDispatcher, setSelectedDispatcher] = useState(null);
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  
  
   const API_URL = "https://viaridebackend.vercel.app/api/ViaRide/dispatcher";
 
@@ -49,6 +51,8 @@ const Dispatcher = () => {
   // Fetch dispatchers from backend
   useEffect(() => {
     fetchDispatchers();
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) setEmail(storedEmail);
   }, []);
  
   const fetchDispatchers = async () => {
@@ -65,26 +69,71 @@ const Dispatcher = () => {
   // Delete dispatcher
   const confirmDelete = async () => {
     if (!selectedDispatcher) return;
+  
     try {
       await axios.delete(`${API_URL}/${selectedDispatcher._id}`);
+  
+      // Log INFO
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Dispatcher ${selectedDispatcher.email} deleted successfully by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+  
       setDispatchers(dispatchers.filter((d) => d._id !== selectedDispatcher._id));
       closePopup();
     } catch (error) {
       console.error("Error deleting dispatcher:", error);
+  
+      // Log ERROR
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Failed to delete dispatcher ${selectedDispatcher.email} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
     }
   };
+  
  
   // Update dispatcher
   const handleSaveChanges = async () => {
     if (!editedDispatcher) return;
+  
     try {
-      const response = await axios.put(`${API_URL}/${editedDispatcher._id}`, editedDispatcher);
-      setDispatchers(dispatchers.map((d) => (d._id === editedDispatcher._id ? response.data : d)));
+      const response = await axios.put(
+        `${API_URL}/${editedDispatcher._id}`,
+        editedDispatcher
+      );
+  
+      // Log INFO
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Dispatcher ${editedDispatcher.email} updated successfully by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+  
+      setDispatchers(
+        dispatchers.map((d) =>
+          d._id === editedDispatcher._id ? response.data : d
+        )
+      );
       closePopup();
     } catch (error) {
       console.error("Error updating dispatcher:", error);
+  
+      // Log ERROR
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Failed to update dispatcher ${editedDispatcher.email} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
     }
   };
+  
   
  
   const handleEditProfile = () => {

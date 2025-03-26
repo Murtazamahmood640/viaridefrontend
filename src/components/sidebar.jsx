@@ -170,6 +170,12 @@ const Sidebar = ({
                   <FaMap /> <span>{isCollapsed ? "" : "Zone Setup"}</span>
                 </Link>
               </li>
+              {/* Logs  */}
+              <li className="links">
+                <Link to="/log-list">
+                  <FaClipboardList  /> <span>{isCollapsed ? "" : "Log List"}</span>
+                </Link>
+              </li>
 
               {/* Dispatch Ride */}
               <li>

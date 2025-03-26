@@ -6,12 +6,22 @@ import BankAccount from "../../Assets/SidebarDropdownIcons/bank_account.png";
 import DriverLicense from "../../Assets/SidebarDropdownIcons/driver_license.png";
 import CNIC from "../../Assets/SidebarDropdownIcons/cnic_card.png";
 import Profile from "../../Assets/Logo/profile.jpg";
+import axios from "axios";
+
+
 const VehicleDetails = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedDriver, setSelectedDriver] = useState(null);
   const [declinePopupOpen, setDeclinePopupOpen] = useState(false); // New state for decline popup
+  const [email, setEmail] = useState("");
+
+React.useEffect(() => {
+  const storedEmail = localStorage.getItem("email");
+  if (storedEmail) setEmail(storedEmail);
+}, []);
+
  
 const openDeclinePopup = () => {
   setDeclinePopupOpen(true);
@@ -77,6 +87,51 @@ const closeDeclinePopup = () => {
     setSelectedDriver(null);
     setPopupOpen(false);
   };
+
+  const handleAccept = async () => {
+    try {
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Vehicle request for ${selectedDriver.name} (${selectedDriver.driverid}) accepted by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Error accepting vehicle request for ${selectedDriver.name} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
+    } finally {
+      closePopup(); // Close regardless of success or failure
+    }
+  };
+  
+  const handleDecline = async () => {
+    try {
+      await axios.post("http://localhost:4000/api/viaRide/info", {
+        level: "INFO",
+        message: `Vehicle request for ${selectedDriver.name} (${selectedDriver.driverid}) declined by ${email}.`,
+        timestamp: new Date().toISOString(),
+      });
+  
+      setDeclinePopupOpen(true); // Open the decline reason modal
+    } catch (error) {
+      await axios.post("http://localhost:4000/api/viaRide/error", {
+        level: "ERROR",
+        message: `Error declining vehicle request for ${selectedDriver.name} by ${email}: ${
+          error.response?.data?.message || error.message
+        }`,
+        timestamp: new Date().toISOString(),
+      });
+  
+      closePopup(); // Close the main popup even if decline fails
+    }
+  };
+
+  
+
 
 
 
@@ -272,13 +327,14 @@ const closeDeclinePopup = () => {
 
 
 <div className="popup-actions-buttons">
-<button className="btn-decline-buttons" onClick={openDeclinePopup}>
+<button className="btn-decline-buttons" onClick={handleDecline}>
   Decline
 </button>
  
-  <button className="btn-accept-buttons" onClick={closePopup}>
-    Accept
-  </button>
+  <button className="btn-accept-buttons" onClick={handleAccept}>
+  Accept
+</button>
+
 </div>
  
  

@@ -4,7 +4,7 @@ import Sidebar from "./components/sidebar";
 import TopBar from "./components/topbar";
 import Profile from "./pages/Profile/AdminProfile";
 import NotSupported from "./NotSupported";
-
+import LogList from "./pages/Logs/logList";
 // Importing existing pages
 import Dashboard from "./pages/Dashboard/index";
 import ZoneSetup from "./pages/ZoneSetup/ZoneSetup";
@@ -142,6 +142,7 @@ const App = () => {
                     <Route element={<ProtectedRoutes allowedRoles={['Admin']} />}>
                       <Route path="/dashboard" element={<Dashboard />} />
                       <Route path="/zone-setup" element={<ZoneSetup />} />
+                      <Route path="/log-list" element={<LogList />} />
                       <Route path="/price-model" element={<PriceModel />} />
                       <Route path="/drivermanagement/alldrivers" element={<Drivers />} />
                       <Route path="/drivermanagement/details" element={<DriverDetails />} />

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaMotorcycle, FaCar, FaCarSide, FaCarAlt } from "react-icons/fa";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoMdCar } from "react-icons/io";
+import axios from "axios";
+
 
 import "./PriceModel.css";
 
@@ -11,6 +13,41 @@ const PriceModel = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [showThankYou, setShowThankYou] = useState(false);
   const [activeModal, setActiveModal] = useState(null); // To track the active modal
+  const [email, setEmail] = useState("");
+
+React.useEffect(() => {
+  const storedEmail = localStorage.getItem("email");
+  if (storedEmail) setEmail(storedEmail);
+}, []);
+
+
+const handleSaveClick = async () => {
+  try {
+    // Log INFO: Save button clicked
+    await axios.post("http://localhost:4000/api/viaRide/info", {
+      level: "INFO",
+      message: `Price model configuration saved by ${email}.`,
+      timestamp: new Date().toISOString(),
+    });
+
+    // You can put any real save logic here in future
+    alert("Price model saved and logged successfully.");
+  } catch (error) {
+    console.error("Error logging save action:", error);
+
+    // Log ERROR
+    await axios.post("http://localhost:4000/api/viaRide/error", {
+      level: "ERROR",
+      message: `Failed to log price model save action by ${email}: ${
+        error.response?.data?.message || error.message
+      }`,
+      timestamp: new Date().toISOString(),
+    });
+
+    alert("Failed to log save action.");
+  }
+};
+
 
   const openNewVehicleModal = () => {
     setActiveModal("newVehicle");
@@ -61,7 +98,9 @@ const PriceModel = () => {
           <button className="newVehicleButton" onClick={openNewVehicleModal}>
             New Vehicle Category
           </button>
-          <button className="saveButton">Save</button>
+          
+          <button className="saveButton" onClick={handleSaveClick}>Save</button>
+
         </div>
       </div>
 

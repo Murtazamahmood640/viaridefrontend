@@ -11,6 +11,8 @@ import uncheck from '../../../src/Assets/DispatchIcons/uncheck-rb.png';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 const AllDrivers = () => {
@@ -102,6 +104,38 @@ const AllDrivers = () => {
   const [selectedRide, setSelectedRide] = useState(null);
   const [isChatBoxVisible, setChatBoxVisible] = useState(false);
   const [activeDriver, setActiveDriver] = useState(null);
+  const [email, setEmail] = useState('');
+
+React.useEffect(() => {
+  const storedEmail = localStorage.getItem('email');
+  if (storedEmail) setEmail(storedEmail);
+}, []);
+
+const handleChatClick = async (driver) => {
+  try {
+    setActiveDriver(driver);
+    setChatBoxVisible(true);
+
+    // Log the action
+    await axios.post("http://localhost:4000/api/viaRide/info", {
+      level: "INFO",
+      message: `Chat initiated with driver ${driver.name} (${driver.did}) by ${email}.`,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("Error logging chat action:", error);
+
+    await axios.post("http://localhost:4000/api/viaRide/error", {
+      level: "ERROR",
+      message: `Failed to log chat initiation with driver ${driver.name} by ${email}: ${
+        error.response?.data?.message || error.message
+      }`,
+      timestamp: new Date().toISOString(),
+    });
+  }
+};
+
+
 
   // Filter and search logic
   const filteredDrivers = drivers.filter((driver) => {
@@ -200,6 +234,7 @@ const AllDrivers = () => {
                     onClick={() => {
                       setActiveDriver(driver);
                       setChatBoxVisible(true);
+                      handleChatClick(driver);
                     }}
                   >
                     Chat
@@ -219,6 +254,7 @@ const AllDrivers = () => {
                     onClick={() => {
                       setActiveDriver(driver);
                       setChatBoxVisible(true);
+                      handleChatClick(driver);
                     }}
                   >
                     Chat
