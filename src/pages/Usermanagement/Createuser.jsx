@@ -55,7 +55,7 @@ const UserManagement = () => {
       alert("No email found! Redirecting...");
     }
 
-    axios.get("http://localhost:4000/api/viaRide/createuser").then((response) => {setUsers(response.data);}).catch((error) => {
+    axios.get("https://ridebackend.vercel.app/api/viaRide/createuser").then((response) => {setUsers(response.data);}).catch((error) => {
         console.error("Error fetching users:", error);
       });
   }, []);
@@ -101,13 +101,13 @@ const UserManagement = () => {
   
       try {
         const response = await axios.post(
-          "http://localhost:4000/api/viaRide/createuser",
+          "https://ridebackend.vercel.app/api/viaRide/createuser",
           newUser
         );
   
         // If user creation is successful, log INFO
         if (response.status === 200) {
-          await axios.post("http://localhost:4000/api/viaRide/info", {
+          await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
             level: "INFO",
             message: `User ${formData.email} created successfully for ${email}.`,
             timestamp: new Date().toISOString(),
@@ -122,7 +122,7 @@ const UserManagement = () => {
         console.error("Error creating user:", error);
   
         // Log ERROR
-        await axios.post("http://localhost:4000/api/viaRide/error", {
+        await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
           level: "ERROR",
           message: `User creation failed for ${formData.email}: ${
             error.response?.data?.message || error.message
@@ -147,9 +147,9 @@ const UserManagement = () => {
       };
 
       try {
-        const response = await axios.put(`http://localhost:4000/api/viaRide/createuser/${selectedUser._id}`,updatedUser)
+        const response = await axios.put(`https://ridebackend.vercel.app/api/viaRide/createuser/${selectedUser._id}`,updatedUser)
         if (response.status === 200) {
-          await axios.post("http://localhost:4000/api/viaRide/info", {
+          await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
             level: "INFO",
             message: `User${formData.email} updated successfully for ${email}.`,
             timestamp: new Date().toISOString(),
@@ -172,7 +172,7 @@ const UserManagement = () => {
 
       } catch(error) {
         console.error("Error updating user:", error);
-        await axios.post("http://localhost:4000/api/viaRide/error", {
+        await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `User update failed for ${formData.email}: ${
           error.response?.data?.message || error.message
@@ -188,12 +188,12 @@ const UserManagement = () => {
     if (userToDelete) {
       try {
         const response = await axios.delete(
-          `http://localhost:4000/api/viaRide/createuser/${userToDelete._id}`
+          `https://ridebackend.vercel.app/api/viaRide/createuser/${userToDelete._id}`
         );
   
         if (response.status === 200) {
           // Log successful deletion
-          await axios.post("http://localhost:4000/api/viaRide/info", {
+          await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
             level: "INFO",
             message: `User ${userToDelete.email} deleted successfully for ${email}.`,
             timestamp: new Date().toISOString(),
@@ -208,7 +208,7 @@ const UserManagement = () => {
         console.error("Error deleting user:", error);
   
         // Log error during deletion
-        await axios.post("http://localhost:4000/api/viaRide/error", {
+        await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
           level: "ERROR",
           message: `Failed to delete user ${userToDelete.email}: ${
             error.response?.data?.message || error.message

@@ -21,7 +21,7 @@ const BookingScreen = () => {
     // Fetch the trip data from your API when the component mounts
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://viaridebackend.vercel.app/api/viaRide/trips-getting-values");  // Replace with your Trip API URL
+        const response = await axios.get("https://ridebackend.vercel.app/api/viaRide/trips-getting-values");  // Replace with your Trip API URL
         setTrips(response.data); // Assuming the response data is an array of trips
       } catch (error) {
         console.error("Error fetching data:", error);

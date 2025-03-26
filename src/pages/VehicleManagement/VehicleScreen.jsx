@@ -34,7 +34,7 @@ const VehicleScreen = () => {
 
   // Fetch data on component mount
   useEffect(() => {
-    axios.get('https://viaridebackend.vercel.app/api/viaRide/vehicle-get-values') // Replace with your actual API URL
+    axios.get('https://ridebackend.vercel.app/api/viaRide/vehicle-get-values') // Replace with your actual API URL
       .then((response) => {
         setDrivers(response.data);
       })
@@ -58,10 +58,10 @@ const VehicleScreen = () => {
   };
 
   const confirmDelete = () => {
-    axios.delete(`https://viaridebackend.vercel.app/api/viaRide/vehicle-delete-values/${selectedDriver._id}`)
+    axios.delete(`https://ridebackend.vercel.app/api/viaRide/vehicle-delete-values/${selectedDriver._id}`)
       .then(() => {
         // Refetch data after successful delete
-        axios.get('https://viaridebackend.vercel.app/api/viaRide/vehicle-get-values')
+        axios.get('https://ridebackend.vercel.app/api/viaRide/vehicle-get-values')
           .then((response) => {
             setDrivers(response.data);
           })
@@ -127,10 +127,10 @@ const VehicleScreen = () => {
   const handleSaveChanges = () => {
     // Ensure you're sending the correct driver ID (_id)
     if (selectedDriver._id) {
-      axios.put(`https://viaridebackend.vercel.app/api/viaRide/vehicle-put-values/${selectedDriver._id}`, editedDriver)
+      axios.put(`https://ridebackend.vercel.app/api/viaRide/vehicle-put-values/${selectedDriver._id}`, editedDriver)
         .then(() => {
           // Refetch data after successful update
-          axios.get('https://viaridebackend.vercel.app/api/viaRide/vehicle-get-values')
+          axios.get('https://ridebackend.vercel.app/api/viaRide/vehicle-get-values')
             .then((response) => {
               setDrivers(response.data);
             })

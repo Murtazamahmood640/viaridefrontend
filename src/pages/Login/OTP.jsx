@@ -60,7 +60,7 @@ const OTP = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/ViaRide/verify-otp",
+        "https://ridebackend.vercel.app/api/ViaRide/verify-otp",
         {
           email,
           otp: enteredOtp,
@@ -69,7 +69,7 @@ const OTP = () => {
 
       if (response.status === 200) {
         // Log successful OTP verification
-        await axios.post("http://localhost:4000/api/viaRide/info", {
+        await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
           level: "INFO",
           message: `OTP successfully verified for ${email}`,
           timestamp: new Date().toISOString(),
@@ -85,7 +85,7 @@ const OTP = () => {
       alert(error.response?.data?.message || "Invalid OTP! Please try again.");
 
       // Log the failed OTP verification attempt
-      await axios.post("http://localhost:4000/api/viaRide/error", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `OTP verification failed for ${email}: ${error.response?.data?.message}`,
         timestamp: new Date().toISOString(),
@@ -99,7 +99,7 @@ const OTP = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/ViaRide/resend-otp",
+        "https://ridebackend.vercel.app/api/ViaRide/resend-otp",
         {
           email,
         }
@@ -110,7 +110,7 @@ const OTP = () => {
         setOtp(new Array(6).fill("")); // Clear the OTP input fields
 
         // Log the OTP resend event
-        await axios.post("http://localhost:4000/api/viaRide/info", {
+        await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
           level: "INFO",
           message: `New OTP sent to ${email}`,
           timestamp: new Date().toISOString(),
@@ -120,7 +120,7 @@ const OTP = () => {
       alert("Error resending OTP. Please try again.");
 
       // Log the error for resend OTP
-      await axios.post("http://localhost:4000/api/viaRide/error", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `Error resending OTP for ${email}: ${error.message}`,
         timestamp: new Date().toISOString(),

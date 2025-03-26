@@ -117,7 +117,7 @@ const handleChatClick = async (driver) => {
     setChatBoxVisible(true);
 
     // Log the action
-    await axios.post("http://localhost:4000/api/viaRide/info", {
+    await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
       level: "INFO",
       message: `Chat initiated with driver ${driver.name} (${driver.did}) by ${email}.`,
       timestamp: new Date().toISOString(),
@@ -161,7 +161,7 @@ const handleChatClick = async (driver) => {
             <img src={search} alt="Search" className="drisearch-icon" />
             <input
               type="text"
-              placeholder="Search by Name, VID, DID, or Status"
+              placeholder="Search"
               className="drisearch-input"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

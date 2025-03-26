@@ -20,13 +20,13 @@ React.useEffect(() => {
 
 const handleLogoutClick = async () => {
   try {
-    await axios.post("http://localhost:4000/api/viaRide/info", {
+    await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
       level: "INFO",
       message: `Logout confirmation modal opened by ${email}.`,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
-    await axios.post("http://localhost:4000/api/viaRide/error", {
+    await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
       level: "ERROR",
       message: `Error logging logout modal open action by ${email}: ${
         error.response?.data?.message || error.message
@@ -41,13 +41,13 @@ const handleLogoutClick = async () => {
 
   const handleConfirmLogout = async () => {
     try {
-      await axios.post("http://localhost:4000/api/viaRide/info", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
         level: "INFO",
         message: `Global logout initiated by ${email}. All users will be required to re-login.`,
         timestamp: new Date().toISOString(),
       });
     } catch (error) {
-      await axios.post("http://localhost:4000/api/viaRide/error", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `Failed to log global logout action by ${email}: ${
           error.response?.data?.message || error.message

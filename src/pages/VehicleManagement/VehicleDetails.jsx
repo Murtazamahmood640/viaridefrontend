@@ -90,13 +90,13 @@ const closeDeclinePopup = () => {
 
   const handleAccept = async () => {
     try {
-      await axios.post("http://localhost:4000/api/viaRide/info", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
         level: "INFO",
         message: `Vehicle request for ${selectedDriver.name} (${selectedDriver.driverid}) accepted by ${email}.`,
         timestamp: new Date().toISOString(),
       });
     } catch (error) {
-      await axios.post("http://localhost:4000/api/viaRide/error", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `Error accepting vehicle request for ${selectedDriver.name} by ${email}: ${
           error.response?.data?.message || error.message
@@ -110,7 +110,7 @@ const closeDeclinePopup = () => {
   
   const handleDecline = async () => {
     try {
-      await axios.post("http://localhost:4000/api/viaRide/info", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
         level: "INFO",
         message: `Vehicle request for ${selectedDriver.name} (${selectedDriver.driverid}) declined by ${email}.`,
         timestamp: new Date().toISOString(),
@@ -118,7 +118,7 @@ const closeDeclinePopup = () => {
   
       setDeclinePopupOpen(true); // Open the decline reason modal
     } catch (error) {
-      await axios.post("http://localhost:4000/api/viaRide/error", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `Error declining vehicle request for ${selectedDriver.name} by ${email}: ${
           error.response?.data?.message || error.message

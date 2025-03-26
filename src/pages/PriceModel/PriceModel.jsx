@@ -24,7 +24,7 @@ React.useEffect(() => {
 const handleSaveClick = async () => {
   try {
     // Log INFO: Save button clicked
-    await axios.post("http://localhost:4000/api/viaRide/info", {
+    await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
       level: "INFO",
       message: `Price model configuration saved by ${email}.`,
       timestamp: new Date().toISOString(),
@@ -36,7 +36,7 @@ const handleSaveClick = async () => {
     console.error("Error logging save action:", error);
 
     // Log ERROR
-    await axios.post("http://localhost:4000/api/viaRide/error", {
+    await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
       level: "ERROR",
       message: `Failed to log price model save action by ${email}: ${
         error.response?.data?.message || error.message

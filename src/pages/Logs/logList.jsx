@@ -21,27 +21,25 @@ const LogList = () => {
   const fetchLogs = async () => {
     setLoading(true);
     try {
-      // Convert selected date to 'YYYY-MM-DD' format for filtering (ignoring time)
       const dateParam = selectedDate
-        ? new Date(selectedDate).toISOString().split("T")[0]  // '2025-03-25'
+        ? new Date(selectedDate).toISOString().split("T")[0]
         : null;
 
       const params = {
         level: logTypeFilter,
-        date: dateParam, // Send only the date part (YYYY-MM-DD)
+        date: dateParam,
         name: searchTerm,
-        page: currentPage, // Include page for pagination
-        limit: 10,  // Update to 10 entries per page
+        page: currentPage,
+        limit: 10, // Pagination limit
       };
 
       const response = await axios.get(API_URL, { params });
-      let fetchedLogs = response.data.logs || [];
 
-      // Sort logs by createdAt in descending order on the frontend (most recent first)
-      fetchedLogs = fetchedLogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      let fetchedLogs = response.data.logs || [];
+      fetchedLogs = fetchedLogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort with recent entries first
 
       setLogs(fetchedLogs);
-      setTotalPages(Math.ceil(response.data.totalLogs / 10)); // Total pages based on the new limit
+      setTotalPages(Math.ceil(response.data.totalLogs / 10));
       setLoading(false);
     } catch (error) {
       console.error("Error fetching logs:", error);
@@ -64,12 +62,19 @@ const LogList = () => {
 
   const handleDateChange = (date) => {
     if (date) {
-      // Strip the time and convert to UTC without any time zone shift
-      const adjustedDate = new Date(date).setHours(0, 0, 0, 0); // Set time to midnight to avoid timezone issues
-      setSelectedDate(new Date(adjustedDate)); // Set the date with no time part
+      const adjustedDate = new Date(date).setHours(0, 0, 0, 0);
+      setSelectedDate(new Date(adjustedDate));
     } else {
-      setSelectedDate(null); // Reset if no date is selected
+      setSelectedDate(null);
     }
+  };
+
+  // Calculate the pagination window (e.g., 1-5, 6-10, etc.)
+  const getPaginationRange = () => {
+    const start = Math.floor((currentPage - 1) / 5) * 5 + 1; // Start page (1-5, 6-10, etc.)
+    const end = Math.min(start + 4, totalPages); // End page (limit to totalPages)
+
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
   };
 
   return (
@@ -159,13 +164,13 @@ const LogList = () => {
                 >
                   Previous
                 </span>
-                {Array.from({ length: totalPages }, (_, index) => (
+                {getPaginationRange().map((page) => (
                   <span
-                    key={index}
-                    className={`pagination-link ${currentPage === index + 1 ? "active" : ""}`}
-                    onClick={() => handlePageChange(index + 1)}
+                    key={page}
+                    className={`pagination-link ${currentPage === page ? "active" : ""}`}
+                    onClick={() => handlePageChange(page)}
                   >
-                    {index + 1}
+                    {page}
                   </span>
                 ))}
                 <span

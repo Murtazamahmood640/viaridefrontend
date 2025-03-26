@@ -33,7 +33,7 @@ const Dispatcher = () => {
   const [email, setEmail] = useState("");
   
  
-  const API_URL = "https://viaridebackend.vercel.app/api/ViaRide/dispatcher";
+  const API_URL = "https://ridebackend.vercel.app/api/ViaRide/dispatcher";
 
   // Close popup
   const closePopup = () => {
@@ -74,7 +74,7 @@ const Dispatcher = () => {
       await axios.delete(`${API_URL}/${selectedDispatcher._id}`);
   
       // Log INFO
-      await axios.post("http://localhost:4000/api/viaRide/info", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
         level: "INFO",
         message: `Dispatcher ${selectedDispatcher.email} deleted successfully by ${email}.`,
         timestamp: new Date().toISOString(),
@@ -86,7 +86,7 @@ const Dispatcher = () => {
       console.error("Error deleting dispatcher:", error);
   
       // Log ERROR
-      await axios.post("http://localhost:4000/api/viaRide/error", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `Failed to delete dispatcher ${selectedDispatcher.email} by ${email}: ${
           error.response?.data?.message || error.message
@@ -108,7 +108,7 @@ const Dispatcher = () => {
       );
   
       // Log INFO
-      await axios.post("http://localhost:4000/api/viaRide/info", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/info", {
         level: "INFO",
         message: `Dispatcher ${editedDispatcher.email} updated successfully by ${email}.`,
         timestamp: new Date().toISOString(),
@@ -124,7 +124,7 @@ const Dispatcher = () => {
       console.error("Error updating dispatcher:", error);
   
       // Log ERROR
-      await axios.post("http://localhost:4000/api/viaRide/error", {
+      await axios.post("https://ridebackend.vercel.app/api/viaRide/error", {
         level: "ERROR",
         message: `Failed to update dispatcher ${editedDispatcher.email} by ${email}: ${
           error.response?.data?.message || error.message
